@@ -1,0 +1,40 @@
+CAR DEALERSHIP MANAGEMENT SYSTEM - PRE SALES MODULE
+
+-Customers make enquiry
+Types of Enquiry:
+Physical - cusomter makes the enquiry at the showroom, in person
+Online 
+->Online web: through web site
+->Online digital ads
+
+Stages involved:
+1. Enquiry(fill in enquiry form) - OPTIONAL
+-Data capture: name, mobile number(mandatory. unique key), email(optional), Vehicle model
+ ->Key:combination of Mobile number and Vehicle model
+-Notification sent to Sales executive 
+-Action: Customer gets a callback from Sales executive within 15mins
+
+2. Test drive booking (online form to fill in info and capture on DB)
+-Data to be captured: Name, Date, Place, Vehicle model, mobile number
+ ->Key:combination of Mobile number and Vehicle model
+-2a: Booking by customer online:
+-2b: Booking by customer offline:
+-Enquiry data logged in: Table:- Name, Mobile number, Enquiry id. Main table where data is captured against every new user
+-Booking data logged in: Table:- Enquiry Id(foreign key), Vehicle model, Date, Place
+
+3. Test drive taken(use a flag to mark if test drive taken. for display on dashboard)
+-Test drive data logged in: Table:- Date, dealership, 
+
+4. Vehicle booking(user fills in booking form.capture data on DB)
+
+5. Booking Cancellation
+
+Vehicle delivery
+
+Dashboard report 
+
+Types of Users:
+Dealership Admin 
+- gets the entire view
+Sales Executives
+- gets the specific view of enquiries assigned to them
