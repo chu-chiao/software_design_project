@@ -38,3 +38,93 @@ Dealership Admin
 - gets the entire view
 Sales Executives
 - gets the specific view of enquiries assigned to them
+
+----------------------------------------------------------------------------------------------------------------------
+
+Do we produce cars and sell, or do sellers come to display their cars on our website? 
+
+
+Customer can:
+- Make Enquiry
+- Book for test drive
+- Book for a vehicle
+- Cancel a booking
+
+Admin can:
+- Add new vehicles
+- Remove vehicles
+- View vehicles
+- View customer bookings
+- Register sales executives
+- View report
+
+Sales Executives can:
+- Send test drive appointment
+- Mark if test drive is taken
+- Mark if car has been sold
+- View customer bookings
+- View report
+
+Delivery person??
+
+I think these 3 users are enough
+
+Flow 1:
+
+Customer visits website
+Customer checks different cars of interest and add them to their test driving list (there should probably be a limit to the number
+of cars a customer can pick for test driving)
+Customer books a date, time and location for test driving 
+Customer receives booking ID
+Sales executive receives booking notification
+Sales executive follows up with the customer (Phone call, email) 
+Customer comes for the test drive 
+Sales executive marks the car as tested by the customer
+Customer books the car
+Sales executive notifies the customer when car is available
+Customer picks up the car
+
+
+Note: The backend should be able to populate the car availability
+
+
+
+Flow 2:
+
+Customer visits website
+Customer books a test driving appointment
+Sales executive approves booking
+Customer comes for test drive
+
+
+Flow 3:
+
+1. Customer visits website
+2. Customer checks different cars of interest and add them to their test driving list (there should probably be a limit to the number
+of cars a customer can pick for test driving)
+3. Customer books a date, time and location for test driving 
+4. Customer receives booking ID
+5. Sales executive receives booking notification
+6. Sales executive follows up with the customer (Phone call, email)
+7. Sales executive cancels after follow up (customer's booking status is updated to Inactive)
+
+
+Flow 4:
+1. Customer visits website
+2. Customer searches the booking ID
+3. Customer himself cancels (customer's booking status is updated to Inactivate)
+4. Sales executive gets a notification of cancellation
+ 
+
+Flow 5:
+1. Customer visits website
+2. Customer searches the booking ID
+3. Customer himself updates (booking table is updated for the respective booking id)
+4. Sales executive gets a notification of update
+
+Flow 6:
+- Sales executive updates after follow up (booking table is updated for the respective booking id)
+
+Note: We can have a status in the table that is Active or Inactive
+
+ 
