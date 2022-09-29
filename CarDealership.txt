@@ -127,4 +127,36 @@ Flow 6:
 
 Note: We can have a status in the table that is Active or Inactive
 
+--------------------------------------------------------------------------------------------------------------
+
+27/09/2022
+
+Requirements:
+Functional Requirements
+
+For Customer:
+1. Customer can view car details
+2. Customer can book for a test drive by supplying the following details: name, email, phone number, date, time, location,
+car model
+3. Customer can search for a booking by supplying booking Id
+4. Customer can cancel booking
+5. Customer can update booking
+6. Customer can book for car
+7. Customer can pay for car
+
+For Sales Executive:
+1. Sales executive can add remarks
+2. Sales executive can login
+3. Sales executive can change booking status
+4. Sales executive can cancel a booking
+5. Sales executive can update a booking
+6. Sales executive can view all bookings (can also filter with parameters e.g name, date range, car model)
+7. Sales executive can send reminder emails and sms
+
+For Dealer:
+1. Dealer can manage sales executive (register, disable account, enable account)
+2. Dealer can manage vehicles (add, make available or unavailable, update)
+3. Dealer can view report
+4. Dealer can view bookings
+5. Dealer can modify sales executive enquiry assignment (e.g switch sales executives)
  
