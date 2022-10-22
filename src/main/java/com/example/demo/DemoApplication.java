@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,5 +17,12 @@ public class DemoApplication {
 	@RequestMapping("/")
 	String sayHello() {
 		return "Hello World!";
+	}
+
+	//Http Get method to get the student list in JSON format
+	@GetMapping("/getAbcd")
+	public String getAbc(String name)
+	{
+		return "123456 " + name;
 	}
 }
