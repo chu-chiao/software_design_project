@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/*.jar'
+          path: 'C:/D/1st semester/Software design/project/git_control/software_design_project/JavaEEHelloWorld/*.jar'
 
   deploy:
     runs-on: windows-latest
