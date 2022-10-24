@@ -1,0 +1,185 @@
+CAR DEALERSHIP MANAGEMENT SYSTEM - PRE SALES MODULE
+
+-Customers make enquiry
+Types of Enquiry:
+Physical - cusomter makes the enquiry at the showroom, in person
+Online 
+->Online web: through web site
+->Online digital ads
+
+Stages involved:
+1. Enquiry(fill in enquiry form) - OPTIONAL
+-Data capture: name, mobile number(mandatory. unique key), email(optional), Vehicle model
+ ->Key:combination of Mobile number and Vehicle model
+-Notification sent to Sales executive 
+-Action: Customer gets a callback from Sales executive within 15mins
+
+2. Test drive booking (online form to fill in info and capture on DB)
+-Data to be captured: Name, Date, Place, Vehicle model, mobile number
+ ->Key:combination of Mobile number and Vehicle model
+-2a: Booking by customer online:
+-2b: Booking by customer offline:
+-Enquiry data logged in: Table:- Name, Mobile number, Enquiry id. Main table where data is captured against every new user
+-Booking data logged in: Table:- Enquiry Id(foreign key), Vehicle model, Date, Place
+
+3. Test drive taken(use a flag to mark if test drive taken. for display on dashboard)
+-Test drive data logged in: Table:- Date, dealership, 
+
+4. Vehicle booking(user fills in booking form.capture data on DB)
+
+5. Booking Cancellation
+
+Vehicle delivery
+
+Dashboard report 
+
+Types of Users:
+Dealership Admin 
+- gets the entire view
+Sales Executives
+- gets the specific view of enquiries assigned to them
+
+----------------------------------------------------------------------------------------------------------------------
+
+Do we produce cars and sell, or do sellers come to display their cars on our website? 
+
+
+Customer can:
+- Make Enquiry
+- Book for test drive
+- Book for a vehicle
+- Cancel a booking
+
+Admin can:
+- Add new vehicles
+- Remove vehicles
+- View vehicles
+- View customer bookings
+- Register sales executives
+- View report
+
+Sales Executives can:
+- Send test drive appointment
+- Mark if test drive is taken
+- Mark if car has been sold
+- View customer bookings
+- View report
+
+Delivery person??
+
+I think these 3 users are enough
+
+Flow 1:
+
+Customer visits website
+Customer checks different cars of interest and add them to their test driving list (there should probably be a limit to the number
+of cars a customer can pick for test driving)
+Customer books a date, time and location for test driving 
+Customer receives booking ID
+Sales executive receives booking notification
+Sales executive follows up with the customer (Phone call, email) 
+Customer comes for the test drive 
+Sales executive marks the car as tested by the customer
+Customer books the car
+Sales executive notifies the customer when car is available
+Customer picks up the car
+
+
+Note: The backend should be able to populate the car availability
+
+
+
+Flow 2:
+
+Customer visits website
+Customer books a test driving appointment
+Sales executive approves booking
+Customer comes for test drive
+
+
+Flow 3:
+
+1. Customer visits website
+2. Customer checks different cars of interest and add them to their test driving list (there should probably be a limit to the number
+of cars a customer can pick for test driving)
+3. Customer books a date, time and location for test driving 
+4. Customer receives booking ID
+5. Sales executive receives booking notification
+6. Sales executive follows up with the customer (Phone call, email)
+7. Sales executive cancels after follow up (customer's booking status is updated to Inactive)
+
+
+Flow 4:
+1. Customer visits website
+2. Customer searches the booking ID
+3. Customer himself cancels (customer's booking status is updated to Inactivate)
+4. Sales executive gets a notification of cancellation
+ 
+
+Flow 5:
+1. Customer visits website
+2. Customer searches the booking ID
+3. Customer himself updates (booking table is updated for the respective booking id)
+4. Sales executive gets a notification of update
+
+Flow 6:
+- Sales executive updates after follow up (booking table is updated for the respective booking id)
+
+Note: We can have a status in the table that is Active or Inactive
+
+--------------------------------------------------------------------------------------------------------------
+
+27/09/2022
+
+Requirements:
+Functional Requirements
+
+For Customer:
+1. Customer can view car details
+2. Customer can book for a test drive by supplying the following details: name, email, phone number, date, time, location,
+car model
+3. Customer can search for a booking by supplying booking Id
+4. Customer can cancel booking
+5. Customer can update booking
+6. Customer can book for car
+7. Customer can pay for car
+
+For Sales Executive:
+1. Sales executive can add remarks (remarks are in different table from booking)
+2. Sales executive can login
+3. (REMOVED) Sales executive can change booking status
+4. Sales executive can cancel a booking
+5. Sales executive can update a booking
+	- change booking status
+6. Sales executive can view all bookings (can also filter with parameters e.g name, date range, car model)
+7. Sales executive can send reminder emails and sms
+
+For Dealer:
+1. Dealer can manage sales executive (register, disable account, enable account)
+2. Dealer can manage vehicles (add, make available or unavailable, update)
+3. Dealer can view report
+4. Dealer can view bookings
+5. Dealer can modify sales executive enquiry assignment (e.g switch sales executives)
+
+
+Polymorphism
+1. update test drive booking: sales executive can reactivate the canceled booking (customer cannot), dealer can update assignee
+2. view booking history: dealer can view all booking requests (sales executive can only view booking request which assign to him)
+3. view booking detail: test drive v.s. car booking
+4. send reminder emails or sms: different content for overdue, ...
+5. login: different ways for staff or customer
+
+
+Non-functional requirements
+1.	Clear Definition and Segregation of the Roles
+2.	UI rendering performance should be good.// Performance measure will be decided later based on the system
+3.	Data processing which includes CRUD functions should be fast enough
+4.	Proper display of the error messages on any task abort
+5.	Proper communication between the System and the customer, wrt Booking id, Follow up notifications
+6.	Proper display of the Bookings list to the Sales Executive and the Dealer
+7.	Booking is assigned to the Sales executive in a round-robin approach
+8.	UI should be user friendly
+9.	System security-The system should be able to authenticate the customer during Booking details retrieval
+10.	System security-Sales executive and dealer need to set strong password to create an account
+11.	Portability-The system can be access by browsers on multiple devices
+12.	Reliability-The update of booking details should be atomic
