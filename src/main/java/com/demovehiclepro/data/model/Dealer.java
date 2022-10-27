@@ -6,6 +6,7 @@ import org.apache.tomcat.jni.Address;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -16,9 +17,9 @@ public class Dealer extends BaseUser{
     private Long id;
 
     @OneToMany
-    private HashSet<SalesExecutive> salesExecutives;
+    private Set<SalesExecutive> salesExecutives;
 
     @OneToMany
-    private HashSet<Vehicle> vehicles;
+    private Set<Vehicle> vehicles;
 
 }

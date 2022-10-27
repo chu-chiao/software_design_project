@@ -1,6 +1,7 @@
 package com.demovehiclepro.controller;
 
 import com.demovehiclepro.dtos.RegistrationDTO;
+import com.demovehiclepro.service.authentication.AuthService;
 import com.demovehiclepro.util.FactoryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,9 @@ public class Authentication{
     @PostMapping("/v1/register")
     public ResponseEntity<?> register(@RequestBody RegistrationDTO registrationDTO){
 
-        return ResponseEntity.ok(factoryUtil.register(registrationDTO));
+        AuthService newAuthService = factoryUtil.createService(registrationDTO);
+
+        return ResponseEntity.ok(newAuthService.register(registrationDTO));
     }
 
 }
