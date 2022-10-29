@@ -1,5 +1,6 @@
 package com.demovehiclepro.data.model;
 
+import com.demovehiclepro.data.enums.Color;
 import com.demovehiclepro.data.enums.PaymentPlan;
 import lombok.Data;
 
@@ -17,8 +18,9 @@ public class Vehicle {
     private Long id;
 
     private String model;
-    private String color;
+    private Color color;
     private Double price;
+    private Integer capacity;
     private PaymentPlan paymentPlan;
 
 
