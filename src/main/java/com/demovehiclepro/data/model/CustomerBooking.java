@@ -18,9 +18,9 @@ public class CustomerBooking extends BaseUser{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String model;
     private String location;
     private BookingStatus bookingStatus;
     private Date creationDate;
-    private Long sales_Executive_Id;
+    private Long vehicleId;
+    private Long salesExecutiveId;
 }

@@ -15,7 +15,7 @@ public class CustomerBookingDTO extends RegistrationDTO {
     }
 
     private String location;
-    private String model;
     private BookingStatus bookingStatus;
     private Date creationDate;
+    private Long vehicleId;
 }

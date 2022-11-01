@@ -22,9 +22,9 @@ public class CustomerBookingAuthService implements AuthService{
     @Override
     public BaseUser register(RegistrationDTO registrationDTO) {
         var customerBookingDTO=(CustomerBookingDTO)registrationDTO;
-        var model=customerBookingDTO.getModel();
+        var vehicleId=customerBookingDTO.getVehicleId();
         var email = customerBookingDTO.getEmail();
-        var customerBooking=customerBookingRepository.findByModelAndEmail(model,email);
+        var customerBooking=customerBookingRepository.findByVehicleIdAndEmail(vehicleId,email);
 
         if(customerBooking.isPresent())
         {
@@ -37,13 +37,13 @@ public class CustomerBookingAuthService implements AuthService{
     private CustomerBooking GetCustomerBooking(CustomerBookingDTO customerBookingDTO)
     {
         var newCustomerBooking=new CustomerBooking();
-        newCustomerBooking.setModel(customerBookingDTO.getModel());
+        newCustomerBooking.setVehicleId(customerBookingDTO.getVehicleId());
         newCustomerBooking.setLocation(customerBookingDTO.getLocation());
         newCustomerBooking.setName(customerBookingDTO.getName());
         newCustomerBooking.setEmail(customerBookingDTO.getEmail());
         newCustomerBooking.setBookingStatus(BookingStatus.TEST_DRIVE_BOOKED);
         newCustomerBooking.setCreationDate(new Date());
-        newCustomerBooking.setSales_Executive_Id(SetAssignee());
+        newCustomerBooking.setSalesExecutiveId(SetAssignee());
         return newCustomerBooking;
     }
 
@@ -61,7 +61,8 @@ public class CustomerBookingAuthService implements AuthService{
         if(lastCreatedBooking.isPresent() && (long) listOfSEs.size() > 1)
         {
             //gets the id of the last assigned sales executive for a booking
-            se_Id=lastCreatedBooking.get().getSales_Executive_Id();
+            se_Id=lastCreatedBooking.get().getSalesExecutiveId();
+
             //gets the sales executive id which is other than the last assigned one.
             //Todo:Rosmy: verify the linq impl
             Long finalSe_Id = se_Id;
