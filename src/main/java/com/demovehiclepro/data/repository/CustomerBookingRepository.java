@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface CustomerBookingRepository extends JpaRepository<CustomerBooking,Long> {
     Optional<CustomerBooking> findByModelAndEmail(String model, String email);
+    Optional<CustomerBooking> findTopByOrderByIdDesc();
 }

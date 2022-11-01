@@ -1,8 +1,11 @@
 package com.demovehiclepro.dtos;
 
+import com.demovehiclepro.data.enums.BookingStatus;
 import com.demovehiclepro.data.enums.UserType;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Setter
 @Getter
@@ -13,4 +16,6 @@ public class CustomerBookingDTO extends RegistrationDTO {
 
     private String location;
     private String model;
+    private BookingStatus bookingStatus;
+    private Date creationDate;
 }

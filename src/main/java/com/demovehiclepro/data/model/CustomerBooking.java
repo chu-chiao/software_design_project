@@ -1,5 +1,6 @@
 package com.demovehiclepro.data.model;
 
+import com.demovehiclepro.data.enums.BookingStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Data
 @Entity
@@ -18,4 +20,7 @@ public class CustomerBooking extends BaseUser{
 
     private String model;
     private String location;
+    private BookingStatus bookingStatus;
+    private Date creationDate;
+    private Long sales_Executive_Id;
 }
