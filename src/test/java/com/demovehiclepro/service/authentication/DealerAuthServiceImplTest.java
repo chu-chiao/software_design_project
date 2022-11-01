@@ -26,6 +26,7 @@ class DealerAuthServiceImplTest {
         assertEquals(null,testDealer.getName());
 
         testDealer = dealerAuthService.register(newRegistrationDto);
+
         assertEquals("testUser",testDealer.getName());
     }
 }
