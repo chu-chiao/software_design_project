@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HELLO~</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <table>
+        <thead>
+        <tr>
+            <th> Model </th>
+            <th> Color </th>
+        </tr>
+        </thead>
+        <tbody id="vehicleList">
+        <tr th:if="${vehicles.empty}">
+            <td colspan="2"> No vehicles Available </td>
+        </tr>
+        <tr th:each="vehicle : ${vehicles}">
+            <td><span th:text="${vehicle.model}"> Model </span></td>
+            <td><span th:text="${vehicle.color}"> Color </span></td>
+        </tr>
+        </tbody>
+    </table>
+<script>
+    var ws;
+
+    function sendData() {
+        var data = JSON.stringify({
+            'user' : $("#user").val()
+        })
+        ws.send(data);
+    }
+
+    function appendTable(message) {
+        var obj = JSON.parse(message);
+        //$("#vehicleList").append(" " + message + "");
+        $('#vehicleList tr:last').after('<td><span> ' + obj.model  + '</span></td>\n' +
+            '<td><span>' + obj.color + '</span></td>');
+    }
+
+    $(window).on("load", function() {
+        console.log("Page loaded");
+        ws = new WebSocket('ws://localhost:8180/vehicle-list');
+        ws.onmessage = function(data) {
+            appendTable(data.data);
+        }
+        ws.onopen = (e) => {
+            sendData();
+            console.log("connect");
+        };
+    });
+</script>
+</body>
+</html>
