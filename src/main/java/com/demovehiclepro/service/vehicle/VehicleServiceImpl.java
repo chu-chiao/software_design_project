@@ -40,7 +40,7 @@ public class VehicleServiceImpl implements VehicleService {
         ObjectMapper mapper = new ObjectMapper();
         try {
             String json = mapper.writeValueAsString(newVehicleDTO);
-            VehicleData vehicleData = VehicleData.getInstance();
+            VehicleListDisplay.VehicleData vehicleData = VehicleListDisplay.VehicleData.getInstance();
             vehicleData.notifyUpdate(new TextMessage(json));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
