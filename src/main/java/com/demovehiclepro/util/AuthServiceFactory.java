@@ -13,6 +13,7 @@ public final class AuthServiceFactory {
 
     @Autowired
     DealerAuthService dealerAuthService;
+
     SalesExecutiveAuthService salesExecutiveAuthService;
 
     public AuthService getAuthService(RegistrationDTO registrationDTO){
