@@ -3,7 +3,6 @@ package com.demovehiclepro.util;
 import com.demovehiclepro.data.enums.UserType;
 import com.demovehiclepro.dtos.RegistrationDTO;
 import com.demovehiclepro.service.authentication.AuthService;
-import com.demovehiclepro.service.authentication.CustomerBookingAuthService;
 import com.demovehiclepro.service.authentication.DealerAuthService;
 import com.demovehiclepro.service.authentication.SalesExecutiveAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,7 @@ public final class AuthServiceFactory {
 
     @Autowired
     DealerAuthService dealerAuthService;
-    @Autowired
     SalesExecutiveAuthService salesExecutiveAuthService;
-
-    @Autowired
-    CustomerBookingAuthService customerBookingAuthService;
 
     public AuthService getAuthService(RegistrationDTO registrationDTO){
 
@@ -30,8 +25,7 @@ public final class AuthServiceFactory {
                 authService = dealerAuthService;
                 break;
             case CUSTOMER:
-                authService = customerBookingAuthService;
-                break;
+                //todo: call registration method for Customer usertype
 
             case SALES_EXECUTIVE:
                 authService = salesExecutiveAuthService;
