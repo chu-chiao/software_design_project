@@ -18,13 +18,19 @@ public class CustomerBookingAuthService implements AuthService{
 
     @Autowired
     CustomerBookingRepository customerBookingRepository;
+
+    @Autowired
     SalesExecutiveRepository salesExecutiveRepository;
     @Override
     public BaseUser register(RegistrationDTO registrationDTO) {
         var customerBookingDTO=(CustomerBookingDTO)registrationDTO;
-        var vehicleId=customerBookingDTO.getVehicleId();
+        //var vehicleId=customerBookingDTO.getVehicleId();
         var email = customerBookingDTO.getEmail();
-        var customerBooking=customerBookingRepository.findByVehicleIdAndEmail(vehicleId,email);
+        //var customerName = customerBookingDTO.getName();
+        var customerBooking=
+                //customerBookingRepository.findByVehicleIdAndEmailAndName(vehicleId,email,customerName);
+                //Customer booking restricted to one at the moment
+                customerBookingRepository.findByEmail(email);
 
         if(customerBooking.isPresent())
         {
@@ -55,7 +61,6 @@ public class CustomerBookingAuthService implements AuthService{
             throw new RegistrationException("No Sales Executives are registered");
         }
 
-        // Todo Rosmy: to check the below logic
         var lastCreatedBooking=customerBookingRepository.findTopByOrderByIdDesc();
         Long se_Id;
         if(lastCreatedBooking.isPresent() && (long) listOfSEs.size() > 1)
@@ -63,10 +68,9 @@ public class CustomerBookingAuthService implements AuthService{
             //gets the id of the last assigned sales executive for a booking
             se_Id=lastCreatedBooking.get().getSalesExecutiveId();
 
-            //gets the sales executive id which is other than the last assigned one.
-            //Todo:Rosmy: verify the linq impl
+            //gets the sales executive id which is other than the last assigned one. Randomly assigned
             Long finalSe_Id = se_Id;
-            var nextAssignedSE=listOfSEs.stream().filter(se->se.getId().equals(finalSe_Id)).findFirst();
+            var nextAssignedSE=listOfSEs.stream().filter(se->!se.getId().equals(finalSe_Id)).findFirst();
            if(nextAssignedSE.isPresent())
            {
                se_Id=nextAssignedSE.get().getId();
