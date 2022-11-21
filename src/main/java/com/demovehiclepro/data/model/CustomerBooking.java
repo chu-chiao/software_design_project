@@ -20,7 +20,8 @@ public class CustomerBooking extends BaseUser{
 
     private String location;
     private BookingStatus bookingStatus;
-    private Date creationDate;
+    private Date date;
     private Long vehicleId;
     private Long salesExecutiveId;
+    private int leadScore;
 }

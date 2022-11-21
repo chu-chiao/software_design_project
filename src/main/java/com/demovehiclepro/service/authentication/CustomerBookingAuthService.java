@@ -11,8 +11,6 @@ import com.demovehiclepro.exceptions.RegistrationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class CustomerBookingAuthService implements AuthService{
 
@@ -24,11 +22,8 @@ public class CustomerBookingAuthService implements AuthService{
     @Override
     public BaseUser register(RegistrationDTO registrationDTO) {
         var customerBookingDTO=(CustomerBookingDTO)registrationDTO;
-        //var vehicleId=customerBookingDTO.getVehicleId();
         var email = customerBookingDTO.getEmail();
-        //var customerName = customerBookingDTO.getName();
         var customerBooking=
-                //customerBookingRepository.findByVehicleIdAndEmailAndName(vehicleId,email,customerName);
                 //Customer booking restricted to one at the moment
                 customerBookingRepository.findByEmail(email);
 
@@ -47,8 +42,9 @@ public class CustomerBookingAuthService implements AuthService{
         newCustomerBooking.setLocation(customerBookingDTO.getLocation());
         newCustomerBooking.setName(customerBookingDTO.getName());
         newCustomerBooking.setEmail(customerBookingDTO.getEmail());
+        newCustomerBooking.setDate(customerBookingDTO.getDate());
         newCustomerBooking.setBookingStatus(BookingStatus.TEST_DRIVE_BOOKED);
-        newCustomerBooking.setCreationDate(new Date());
+        newCustomerBooking.setLeadScore(10);
         newCustomerBooking.setSalesExecutiveId(SetAssignee());
         return newCustomerBooking;
     }
