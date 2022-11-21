@@ -22,33 +22,11 @@ public class BookingService {
             throw new RuntimeException("Booking is not assigned to the sales executive");
         }
 
-        BookingState bookingState = GetBookingState(customerBooking);
+        BookingState bookingState = BookingStateFactory.CreateBookingState(customerBooking);
         customerBooking.setLeadScore(bookingState.CalculateLeadScore(customerBooking.getLeadScore()));
         customerBooking.setBookingStatus(bookingStatus);
         customerBooking.setDate(date);
         customerBookingRepository.save(customerBooking);
         return customerBooking;
-    }
-
-    private BookingState GetBookingState(CustomerBooking customerBooking) {
-        BookingState bookingState = null;
-        switch (customerBooking.getBookingStatus()){
-            case TEST_DRIVE_OVERDUE:
-                bookingState=new TestDriveOverdueState(customerBooking.getDate());
-                break;
-            case TEST_DRIVE_TAKEN:
-                bookingState=new TestDriveTakenState();
-                break;
-            case VEHICLE_BOOKED:
-                bookingState=new VehicleBookedState(customerBooking.getDate());
-                break;
-            case VEHICLE_BOOKING_CANCELLED:
-                bookingState=new VehicleBookingCancelled();
-                break;
-            case PAYMENT_DONE:
-                bookingState=new PaymentDoneState();
-                break;
-        }
-        return bookingState;
     }
 }
