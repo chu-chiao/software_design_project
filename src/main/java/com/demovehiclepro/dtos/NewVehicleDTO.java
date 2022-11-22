@@ -2,9 +2,12 @@ package com.demovehiclepro.dtos;
 
 import com.demovehiclepro.data.enums.Color;
 import com.demovehiclepro.data.enums.PaymentPlan;
+import com.demovehiclepro.data.model.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @Setter
@@ -14,5 +17,5 @@ public class NewVehicleDTO {
     private Color color;
     private Double price;
     private Integer capacity;
-    private PaymentPlan paymentPlan;
+    private Set<PaymentPlan> paymentPlan;
 }

@@ -4,10 +4,8 @@ import com.demovehiclepro.data.enums.Color;
 import com.demovehiclepro.data.enums.PaymentPlan;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -21,7 +19,8 @@ public class Vehicle {
     private Color color;
     private Double price;
     private Integer capacity;
-    private PaymentPlan paymentPlan;
+    @OneToMany
+    private Set<VehiclePaymentPlan> vehiclePaymentPlans;
 
 
 }

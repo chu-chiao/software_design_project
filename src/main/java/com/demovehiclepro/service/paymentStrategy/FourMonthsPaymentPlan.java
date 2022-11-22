@@ -1,0 +1,13 @@
+package com.demovehiclepro.service.paymentStrategy;
+
+import com.demovehiclepro.data.model.VehiclePaymentPlan;
+
+public class FourMonthsPaymentPlan implements PaymentPlanStrategy{
+
+    @Override
+    public Double calculatePrice(VehiclePaymentPlan vehiclePaymentPlan) {
+
+        return vehiclePaymentPlan.getPrice() +
+                (vehiclePaymentPlan.getPrice() * vehiclePaymentPlan.getRate())/4;
+    }
+}

@@ -20,8 +20,11 @@ class DealerAuthServiceImplTest {
     @Autowired
     DealerRepository dealerRepository;
 
+
     @Test
     void register() {
+        dealerRepository.deleteDealerByEmail("testuser@gmail.com");
+
         RegistrationDTO newRegistrationDto = new RegistrationDTO("testUser",
                 "testuser@gmail.com", UserType.DEALER);
 
@@ -32,10 +35,5 @@ class DealerAuthServiceImplTest {
         testDealer = dealerAuthService.register(newRegistrationDto);
 
         assertEquals("testUser",testDealer.getName());
-    }
-
-    @Test
-    void removeDealer(){
-        dealerRepository.deleteDealerByEmail("testuser@gmail.com");
     }
 }
