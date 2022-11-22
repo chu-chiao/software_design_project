@@ -3,7 +3,7 @@ package com.demovehiclepro.service.booking;
 import com.demovehiclepro.data.model.CustomerBooking;
 
 public class BookingStateFactory {
-    public static BookingState CreateBookingState(CustomerBooking customerBooking) {
+    public BookingState createBookingState(CustomerBooking customerBooking) {
         BookingState bookingState = null;
         switch (customerBooking.getBookingStatus()){
             case TEST_DRIVE_OVERDUE:

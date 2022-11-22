@@ -18,7 +18,7 @@ public class BookingController {
     BookingService bookingService;
 
     @PostMapping("/v1/updateBooking")
-    public ResponseEntity<?> updateBooking(long salesExecId, long bookingId, BookingStatus bookingStatus, Date date)
+    public ResponseEntity<?> updateBooking(Long salesExecId, Long bookingId, BookingStatus bookingStatus, Date date)
     {
         return ResponseEntity.ok(bookingService.UpdateBooking(salesExecId,bookingId,bookingStatus, date));
     }
