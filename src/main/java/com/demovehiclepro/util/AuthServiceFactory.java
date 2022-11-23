@@ -21,7 +21,7 @@ public final class AuthServiceFactory {
     @Autowired
     CustomerBookingAuthService customerBookingAuthService;
 
-    public AuthService getAuthService(RegistrationDTO registrationDTO){
+    public AuthService createAuthService(RegistrationDTO registrationDTO){
 
         UserType userType = registrationDTO.getUserType();
         AuthService authService = null;

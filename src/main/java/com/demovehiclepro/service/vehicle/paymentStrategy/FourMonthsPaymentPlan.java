@@ -1,4 +1,4 @@
-package com.demovehiclepro.service.paymentStrategy;
+package com.demovehiclepro.service.vehicle.paymentStrategy;
 
 import com.demovehiclepro.data.model.VehiclePaymentPlan;
 

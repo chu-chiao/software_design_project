@@ -19,7 +19,7 @@ public class AuthenticationController{
     @PostMapping("/v1/register")
     public ResponseEntity<?> register(@RequestBody RegistrationDTO registrationDTO){
 
-        AuthService newAuthService = authServiceFactory.getAuthService(registrationDTO);
+        AuthService newAuthService = authServiceFactory.createAuthService(registrationDTO);
 
         return ResponseEntity.ok(newAuthService.register(registrationDTO));
     }
