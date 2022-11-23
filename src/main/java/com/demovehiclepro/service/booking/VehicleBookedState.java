@@ -10,7 +10,7 @@ public class VehicleBookedState extends BookingState{
         this.dateOfTestDriveTaken = dateOfTestDriveTaken;
     }
     @Override
-    public int CalculateLeadScore(int leadScore) {
+    public int calculateLeadScore(int leadScore) {
 
         int days = daysBetween(dateOfTestDriveTaken, new Date());
             if( days<=1) {

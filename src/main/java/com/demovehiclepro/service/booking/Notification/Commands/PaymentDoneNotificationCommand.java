@@ -12,12 +12,12 @@ public class PaymentDoneNotificationCommand implements ICommand{
         this.customerBooking = customerBooking;
     }
     @Override
-    public void send() {
+    public void execute() {
         notificationHandler.sendPaymentDoneNotification(customerBooking);
     }
 
     @Override
-    public void unSend() {
+    public void undo() {
         notificationHandler.unSendPaymentDoneNotification(customerBooking);
     }
 }

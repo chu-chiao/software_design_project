@@ -13,12 +13,12 @@ public class TestDriveTakenNotificationCommand implements ICommand{
         this.customerBooking = customerBooking;
     }
     @Override
-    public void send() {
+    public void execute() {
         notificationHandler.sendTestDriveTakenNotification(customerBooking);
     }
 
     @Override
-    public void unSend() {
+    public void undo() {
         notificationHandler.unSendTestDriveTakenNotification(customerBooking);
     }
 }

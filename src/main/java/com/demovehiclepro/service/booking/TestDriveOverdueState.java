@@ -9,7 +9,7 @@ public class TestDriveOverdueState extends BookingState{
         this.dateOfBooking = dateOfBooking;
     }
     @Override
-    public int CalculateLeadScore(int leadScore) {
+    public int calculateLeadScore(int leadScore) {
         int days = daysBetween(dateOfBooking, new Date());
         if (days>=10) {
             leadScore=0;

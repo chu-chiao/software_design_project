@@ -8,12 +8,12 @@ public class NotificationService {
     {
         this.command = notificationCommand;
     }
-    public void executeSendCommand()
+    public void executeSend()
     {
-        command.send();
+        command.execute();
     }
-    public void executeUnSendCommand()
+    public void executeUnSend()
     {
-        command.unSend();
+        command.undo();
     }
 }

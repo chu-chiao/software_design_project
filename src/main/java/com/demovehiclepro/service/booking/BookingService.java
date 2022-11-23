@@ -17,7 +17,7 @@ public class BookingService {
     BookingStateFactory bookingStateFactory;
     NotificationStateFactory notificationStateFactory;
     NotificationService notificationService;
-    public CustomerBooking UpdateBooking(long salesExecId, long bookingId, BookingStatus bookingStatus, Date date){
+    public CustomerBooking updateBooking(long salesExecId, long bookingId, BookingStatus bookingStatus, Date date){
         var customerBooking=
                 customerBookingRepository.findByIdAndSalesExecutiveId(bookingId,salesExecId);
         var notificationService = getNotificationService();
@@ -28,20 +28,21 @@ public class BookingService {
         }
         try {
             customerBookingData=customerBooking.get();
+            var currentLeadScore=customerBookingData.getLeadScore();
             var bookingState = getBookingStateFactory().createBookingState(customerBookingData);
-            customerBookingData.setLeadScore(bookingState.CalculateLeadScore(customerBookingData.getLeadScore()));
+            customerBookingData.setLeadScore(bookingState.calculateLeadScore(currentLeadScore));
             customerBookingData.setBookingStatus(bookingStatus);
             customerBookingData.setDate(date);
 
             var notificationCommand =
                     getNotificationStateFactory().createNotificationCommand(bookingStatus,customerBookingData);
             notificationService.setCommand(notificationCommand);
-            notificationService.executeSendCommand();
+            notificationService.executeSend();
 
             customerBookingRepository.save(customerBookingData);
         }
         catch (IllegalArgumentException exception){
-            notificationService.executeUnSendCommand();
+            notificationService.executeUnSend();
         }
         return customerBookingData;
     }

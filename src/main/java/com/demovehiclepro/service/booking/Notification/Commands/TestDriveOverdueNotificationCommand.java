@@ -12,12 +12,12 @@ public class TestDriveOverdueNotificationCommand implements ICommand{
         this.customerBooking = customerBooking;
     }
     @Override
-    public void send() {
+    public void execute() {
         notificationHandler.sendTestDriveOverdueNotification(customerBooking);
     }
 
     @Override
-    public void unSend() {
+    public void undo() {
         notificationHandler.unSendTestDriveOverdueNotification(customerBooking);
     }
 }

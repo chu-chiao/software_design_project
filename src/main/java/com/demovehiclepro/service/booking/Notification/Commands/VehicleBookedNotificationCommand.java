@@ -12,12 +12,12 @@ public class VehicleBookedNotificationCommand implements ICommand{
         this.customerBooking = customerBooking;
     }
     @Override
-    public void send() {
+    public void execute() {
         notificationHandler.sendVehicleBookedNotification(customerBooking);
     }
 
     @Override
-    public void unSend() {
+    public void undo() {
         notificationHandler.unSendVehicleBookedNotification(customerBooking);
     }
 }
