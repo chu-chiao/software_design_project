@@ -5,8 +5,8 @@ import com.demovehiclepro.data.model.VehiclePaymentPlan;
 public class FourMonthsPaymentPlan implements PaymentPlanStrategy{
 
     @Override
-    public Double calculatePrice(Double price, Double rate) {
+    public Double calculatePrice(Double price, Double interestRate) {
 
-        return price + (price * rate)/4;
+        return price + (price * interestRate)/4;
     }
 }

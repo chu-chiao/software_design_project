@@ -79,14 +79,14 @@ public class VehicleServiceImpl implements VehicleService {
 
                 case FOUR_MONTHS_INSTALLMENT:
                     vehiclePaymentPlan.setPaymentPlanName(PaymentPlan.FOUR_MONTHS_INSTALLMENT);
-                    vehiclePaymentPlan.setRate(0.10);
+                    vehiclePaymentPlan.setInterestRate(0.10);
                     priceToPay = vehiclePaymentPlan.calculatePriceToPay(new FourMonthsPaymentPlan());
 
                     break;
 
                 case SIX_MONTHS_INSTALLMENT:
                     vehiclePaymentPlan.setPaymentPlanName(PaymentPlan.SIX_MONTHS_INSTALLMENT);
-                    vehiclePaymentPlan.setRate(0.12);
+                    vehiclePaymentPlan.setInterestRate(0.12);
                     priceToPay = vehiclePaymentPlan.calculatePriceToPay(new SixMonthsPaymentPlan());
 
                     break;

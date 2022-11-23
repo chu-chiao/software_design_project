@@ -19,7 +19,8 @@ public class VehiclePaymentPlan{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Double price;
-    private Double rate;
+
+    private Double interestRate;
 
     private Double priceToPay;
 
@@ -30,6 +31,6 @@ public class VehiclePaymentPlan{
     }
 
     public Double calculatePriceToPay(PaymentPlanStrategy paymentPlanStrategy) {
-        return paymentPlanStrategy.calculatePrice(this.price, this.rate);
+        return paymentPlanStrategy.calculatePrice(this.price, this.interestRate);
     }
 }

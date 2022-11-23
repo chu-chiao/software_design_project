@@ -4,5 +4,5 @@ import com.demovehiclepro.data.model.VehiclePaymentPlan;
 
 public interface PaymentPlanStrategy {
 
-    Double calculatePrice(Double price, Double rate);
+    Double calculatePrice(Double price, Double interestRate);
 }
