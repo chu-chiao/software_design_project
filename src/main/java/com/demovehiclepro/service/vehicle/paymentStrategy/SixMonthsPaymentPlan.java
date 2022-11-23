@@ -5,9 +5,8 @@ import com.demovehiclepro.data.model.VehiclePaymentPlan;
 public class SixMonthsPaymentPlan implements PaymentPlanStrategy{
 
     @Override
-    public Double calculatePrice(VehiclePaymentPlan vehiclePaymentPlan) {
+    public Double calculatePrice(Double price, Double rate) {
 
-        return vehiclePaymentPlan.getPrice() +
-                (vehiclePaymentPlan.getPrice() * vehiclePaymentPlan.getRate())/6;
+        return price + (price * rate)/6;
     }
 }

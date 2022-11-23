@@ -7,10 +7,7 @@ import com.demovehiclepro.data.repository.VehiclePaymentPlanRepository;
 import com.demovehiclepro.data.repository.VehicleRepository;
 import com.demovehiclepro.dtos.NewVehicleDTO;
 import com.demovehiclepro.exceptions.VehicleException;
-import com.demovehiclepro.service.vehicle.paymentStrategy.FourMonthsPaymentPlan;
-import com.demovehiclepro.service.vehicle.paymentStrategy.OneOffPaymentPlan;
-import com.demovehiclepro.service.vehicle.paymentStrategy.PaymentContext;
-import com.demovehiclepro.service.vehicle.paymentStrategy.SixMonthsPaymentPlan;
+import com.demovehiclepro.service.vehicle.paymentStrategy.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,33 +67,31 @@ public class VehicleServiceImpl implements VehicleService {
         Set<VehiclePaymentPlan> vehiclePaymentPlans = new HashSet<>();
 
         paymentPlans.forEach(paymentPlan -> {
-            PaymentContext paymentContext = null;
             Double priceToPay = null;
             VehiclePaymentPlan vehiclePaymentPlan = new VehiclePaymentPlan(newVehicleDTO.getPrice());
 
             switch (paymentPlan){
                 case ONE_OFF:
-                    vehiclePaymentPlan.setPaymentPlan(PaymentPlan.ONE_OFF);
-                    paymentContext = new PaymentContext(new OneOffPaymentPlan());
+                    vehiclePaymentPlan.setPaymentPlanName(PaymentPlan.ONE_OFF);
+                    priceToPay = vehiclePaymentPlan.calculatePriceToPay(new OneOffPaymentPlan());
 
                     break;
 
                 case FOUR_MONTHS_INSTALLMENT:
-                    vehiclePaymentPlan.setPaymentPlan(PaymentPlan.FOUR_MONTHS_INSTALLMENT);
+                    vehiclePaymentPlan.setPaymentPlanName(PaymentPlan.FOUR_MONTHS_INSTALLMENT);
                     vehiclePaymentPlan.setRate(0.10);
-                    paymentContext = new PaymentContext(new FourMonthsPaymentPlan());
+                    priceToPay = vehiclePaymentPlan.calculatePriceToPay(new FourMonthsPaymentPlan());
 
                     break;
 
                 case SIX_MONTHS_INSTALLMENT:
-                    vehiclePaymentPlan.setPaymentPlan(PaymentPlan.SIX_MONTHS_INSTALLMENT);
+                    vehiclePaymentPlan.setPaymentPlanName(PaymentPlan.SIX_MONTHS_INSTALLMENT);
                     vehiclePaymentPlan.setRate(0.12);
-                    paymentContext = new PaymentContext(new SixMonthsPaymentPlan());
+                    priceToPay = vehiclePaymentPlan.calculatePriceToPay(new SixMonthsPaymentPlan());
 
                     break;
             }
 
-            priceToPay = paymentContext.calculatePrice(vehiclePaymentPlan);
             vehiclePaymentPlan.setPriceToPay(priceToPay);
             VehiclePaymentPlan savedPaymentPlan = vehiclePaymentPlanRepository.save(vehiclePaymentPlan);
 

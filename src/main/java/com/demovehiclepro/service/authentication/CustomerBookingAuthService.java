@@ -27,12 +27,21 @@ public class CustomerBookingAuthService implements AuthService{
                 //Customer booking restricted to one at the moment
                 customerBookingRepository.findByEmail(email);
 
+        // Pre-condition: Customer Booking should not exist
         if(customerBooking.isPresent())
         {
             throw new RegistrationException("The Booking already exists");
         }
+        long count = customerBookingRepository.count();
         CustomerBooking newCustomerBooking=GetCustomerBooking(customerBookingDTO);
-        return customerBookingRepository.save(newCustomerBooking);
+        CustomerBooking savedCustomerBooking = customerBookingRepository.save(newCustomerBooking);
+
+        // Post-condition: Customer booking created
+        assert(savedCustomerBooking.getId()!=null);
+
+        assert customerBookingRepository.count() == count + 1;
+
+        return savedCustomerBooking;
     }
 
     private CustomerBooking GetCustomerBooking(CustomerBookingDTO customerBookingDTO)
