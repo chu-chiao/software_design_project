@@ -1,6 +1,7 @@
 package com.demovehiclepro.service.report;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -12,13 +13,13 @@ public class PieChart extends ReportDecorator{
     }
 
     @Override
-    public JSONObject showReport() {
+    public JSONObject showReport() throws JSONException {
         JSONObject jsonObject = super.generateReport();
         jsonObject.put("pieChart", genPieDataBySe(jsonObject.getJSONArray("raw")));
         return jsonObject;
     }
 
-    private String genPieDataBySe(JSONArray rawData) {
+    private String genPieDataBySe(JSONArray rawData) throws JSONException {
         Map<Integer, Integer> seMap = new HashMap<>();
         String seKey = "SE";
         for (int i = 0, size = rawData.length(); i < size; i++) {

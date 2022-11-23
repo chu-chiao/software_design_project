@@ -1,6 +1,7 @@
 package com.demovehiclepro.service.report;
 
 import com.demovehiclepro.data.model.CustomerBooking;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class ReportFactory {
         this.customerBookingList = customerBookingList;
     }
 
-    public JSONObject getReport() {
+    public JSONObject getReport() throws JSONException {
         Report report;
         report = new SalesReport(this.customerBookingList);
         report = new Header(report);

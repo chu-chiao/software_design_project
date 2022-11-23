@@ -2,6 +2,7 @@ package com.demovehiclepro.service.report;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 @Getter
@@ -11,7 +12,7 @@ abstract public class ReportDecorator extends Report{
     ReportDecorator(Report report) {
         this.report = report;
     }
-    public JSONObject generateReport() {
+    public JSONObject generateReport() throws JSONException {
         if (this.report != null) {
             return this.report.showReport();
         }

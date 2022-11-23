@@ -4,6 +4,7 @@ import com.demovehiclepro.data.repository.CustomerBookingRepository;
 import com.demovehiclepro.dtos.GenReportDTO;
 import com.demovehiclepro.service.report.ReportService;
 import com.demovehiclepro.service.report.ReportServiceImpl;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class ReportController {
     CustomerBookingRepository customerBookingRepository;
 
     @PostMapping(value = "/v1/gen-report", produces = "application/json")
-    public ResponseEntity<?> genReport(@RequestBody GenReportDTO genReportDTO){
+    public ResponseEntity<?> genReport(@RequestBody GenReportDTO genReportDTO) throws JSONException {
         ReportService reportService = new ReportServiceImpl(customerBookingRepository);
         return ResponseEntity.ok(reportService.genReport(genReportDTO));
     }

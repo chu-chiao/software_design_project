@@ -3,6 +3,7 @@ package com.demovehiclepro.service.report;
 import com.demovehiclepro.data.model.CustomerBooking;
 import com.demovehiclepro.data.repository.CustomerBookingRepository;
 import com.demovehiclepro.dtos.GenReportDTO;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
@@ -16,11 +17,11 @@ public class ReportServiceImpl implements ReportService{
         this.customerBookingRepository = customerBookingRepository;
     }
     @Override
-    public JSONObject genReport(GenReportDTO genReportDTO) {
+    public JSONObject genReport(GenReportDTO genReportDTO) throws JSONException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         List<CustomerBooking> customerBookingList = null;
         try {
-            customerBookingList = customerBookingRepository.findAllByCreationDateBetween(
+            customerBookingList = customerBookingRepository.findAllByDateBetween(
                     formatter.parse(genReportDTO.getReportStartDate()), formatter.parse(genReportDTO.getReportEndDate()));
         } catch (ParseException e) {
             throw new RuntimeException(e);

@@ -15,7 +15,7 @@ public class SalesReport extends Report {
     }
 
     @Override
-    public JSONObject showReport() {
+    public JSONObject showReport() throws JSONException {
         JSONArray allDataArray = new JSONArray();
         JSONObject result = new JSONObject();
         if (this.customerBookingList.size() > 0) {

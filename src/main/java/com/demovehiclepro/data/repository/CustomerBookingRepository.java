@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface CustomerBookingRepository extends JpaRepository<CustomerBooking,Long> {
     Optional<CustomerBooking> findByEmail(String email);
     Optional<CustomerBooking> findTopByOrderByIdDesc();
-    List<CustomerBooking> findAllByCreationDateBetween(Date creationTimeStart, Date creationTimeEnd);
+    List<CustomerBooking> findAllByDateBetween(Date creationTimeStart, Date creationTimeEnd);
     Optional<CustomerBooking> findByIdAndSalesExecutiveId(long id, long salesExecId);
 }
