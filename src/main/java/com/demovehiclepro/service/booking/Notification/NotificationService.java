@@ -12,7 +12,7 @@ public class NotificationService {
     {
         command.execute();
     }
-    public void executeUnSend()
+    public void executeCallback()
     {
         command.undo();
     }
