@@ -7,7 +7,7 @@ import com.demovehiclepro.service.booking.Notification.Commands.*;
 public class NotificationStateFactory {
     public ICommand createNotificationCommand(BookingStatus bookingStatus, CustomerBooking customerBooking) {
         ICommand notificationCommand = null;
-        NotificationHandler notificationHandler = new NotificationHandler();
+        INotificationHandler notificationHandler = new NotificationHandler();
         switch (bookingStatus)
         {
             case TEST_DRIVE_BOOKED:

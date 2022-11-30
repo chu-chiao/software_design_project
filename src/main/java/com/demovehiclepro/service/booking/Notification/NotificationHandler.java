@@ -2,68 +2,18 @@ package com.demovehiclepro.service.booking.Notification;
 
 import com.demovehiclepro.data.model.CustomerBooking;
 
-public class NotificationHandler {
-
-    public void sendTestDriveBookedNotification(CustomerBooking customerBooking)
-    {
+public class NotificationHandler implements INotificationHandler{
+    @Override
+    public void sendNotification(CustomerBooking customerBooking) {
         System.out.printf(
-                "Test drive is booked on {0}. Booking Id is:{1}%n",customerBooking.getDate(),customerBooking.getId());
-    }
-    public void sendTestDriveTakenNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Test drive is successfully taken on {0}%n",customerBooking.getDate());
-    }
-    public void sendTestDriveOverdueNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Test drive booked on is overdue {0}%n",customerBooking.getDate());
-    }
-    public void sendVehicleBookedNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Your Vehicle {0} is successfully booked on {1}%n",customerBooking.getVehicleId(), customerBooking.getDate());
-    }
-    public void sendVehBookingCancelledNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Your Vehicle {0} Booked on {1} is cancelled%n",customerBooking.getVehicleId(),customerBooking.getDate());
-    }
-    public void sendPaymentDoneNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Payment for Vehicle {0} is successful%n",customerBooking.getVehicleId());
+                "Status of your booking {0} has been changed to {1} on {2}.%n",
+                customerBooking.getId(),customerBooking.getBookingStatus(), customerBooking.getDate());
     }
 
-    public void unSendTestDriveBookedNotification(CustomerBooking customerBooking)
-    {
+    @Override
+    public void callBackNotification(CustomerBooking customerBooking) {
         System.out.printf(
-                "Test drive booked mail sent for the model {0} is called back%n",customerBooking.getVehicleId());
-    }
-
-    public void unSendTestDriveTakenNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Test drive taken mail sent for model {0}, is called back%n",customerBooking.getVehicleId());
-    }
-    public void unSendTestDriveOverdueNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Test drive overdue notification sent for model {0}, is called back%n",customerBooking.getVehicleId());
-    }
-    public void unSendVehicleBookedNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Vehicle booked mail sent for model {0}, is called back%n",customerBooking.getVehicleId());
-    }
-    public void unSendVehBookingCancelledNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Vehicle booking cancelled mail sent for model {0}, is called back%n",customerBooking.getVehicleId());
-    }
-    public void unSendPaymentDoneNotification(CustomerBooking customerBooking)
-    {
-        System.out.printf(
-                "Payment Acknowledgement notification sent {0}, is called back",customerBooking.getVehicleId());
+                "Mail sent for the booking {0} of state {1} for model {2} is called back%n",
+                customerBooking.getId(), customerBooking.getBookingStatus(), customerBooking.getVehicleId());
     }
 }
