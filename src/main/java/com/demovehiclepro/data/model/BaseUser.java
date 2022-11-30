@@ -9,4 +9,5 @@ import javax.persistence.MappedSuperclass;
 public class BaseUser {
     private String name;
     private String email;
+    private String password;
 }

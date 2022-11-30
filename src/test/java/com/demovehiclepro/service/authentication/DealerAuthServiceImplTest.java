@@ -5,7 +5,9 @@ import com.demovehiclepro.data.model.BaseUser;
 import com.demovehiclepro.data.model.Dealer;
 import com.demovehiclepro.data.repository.DealerRepository;
 import com.demovehiclepro.dtos.RegistrationDTO;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,11 +22,8 @@ class DealerAuthServiceImplTest {
     @Autowired
     DealerRepository dealerRepository;
 
-
     @Test
     void register() {
-        dealerRepository.deleteDealerByEmail("testuser@gmail.com");
-
         RegistrationDTO newRegistrationDto = new RegistrationDTO("testUser",
                 "testuser@gmail.com", UserType.DEALER);
 
