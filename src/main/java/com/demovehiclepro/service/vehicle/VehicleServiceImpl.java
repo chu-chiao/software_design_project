@@ -45,9 +45,7 @@ public class VehicleServiceImpl implements VehicleService {
         newVehicle.setCapacity(newVehicleDTO.getCapacity());
 
         Set<PaymentPlan> paymentPlans = newVehicleDTO.getPaymentPlan();
-
         Set<VehiclePaymentPlan> processedPaymentPlans =  processPaymentPlan(newVehicleDTO, paymentPlans);
-
         newVehicle.setVehiclePaymentPlans(processedPaymentPlans);
 
         vehicleRepository.save(newVehicle);
@@ -55,7 +53,7 @@ public class VehicleServiceImpl implements VehicleService {
         ObjectMapper mapper = new ObjectMapper();
         try {
             String json = mapper.writeValueAsString(newVehicleDTO);
-            VehicleListDisplay.VehicleData vehicleData = VehicleListDisplay.VehicleData.getInstance();
+            VehicleData vehicleData = VehicleData.getInstance();
             vehicleData.notifyUpdate(new TextMessage(json));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
