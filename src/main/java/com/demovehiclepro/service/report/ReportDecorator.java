@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 @Getter
 @Setter
-abstract public class ReportDecorator extends Report{
+abstract public class ReportDecorator implements Report {
     private Report report;
     ReportDecorator(Report report) {
         this.report = report;

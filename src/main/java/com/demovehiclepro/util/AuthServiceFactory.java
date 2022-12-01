@@ -36,6 +36,8 @@ public final class AuthServiceFactory {
             case SALES_EXECUTIVE:
                 authService = salesExecutiveAuthService;
                 break;
+            default:
+                break;
         }
 
         return authService;

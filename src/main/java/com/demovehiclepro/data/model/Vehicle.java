@@ -1,7 +1,6 @@
 package com.demovehiclepro.data.model;
 
 import com.demovehiclepro.data.enums.Color;
-import com.demovehiclepro.data.enums.PaymentPlan;
 import lombok.Data;
 
 import javax.persistence.*;

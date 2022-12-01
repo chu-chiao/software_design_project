@@ -22,30 +22,30 @@ public class BookingService {
         var customerBooking=
                 customerBookingRepository.findByIdAndSalesExecutiveId(bookingId,salesExecId);
         var notificationService = getNotificationService();
-        CustomerBooking customerBookingData =null;
+        CustomerBooking customer_BookingData =null;
         if(customerBooking.isEmpty())
         {
             throw new RegistrationException("Booking is not found");
         }
         try {
-            customerBookingData=customerBooking.get();
-            var currentLeadScore=customerBookingData.getLeadScore();
-            var bookingState = getBookingStateFactory().createBookingState(customerBookingData);
-            customerBookingData.setLeadScore(bookingState.calculateLeadScore(currentLeadScore));
-            customerBookingData.setBookingStatus(bookingStatus);
-            customerBookingData.setDate(date);
+            customer_BookingData=customerBooking.get();
+            var currentLeadScore=customer_BookingData.getLeadScore();
+            var bookingState = getBookingStateFactory().createBookingState(customer_BookingData);
+            customer_BookingData.setLeadScore(bookingState.calculateLeadScore(currentLeadScore));
+            customer_BookingData.setBookingStatus(bookingStatus);
+            customer_BookingData.setDate(date);
 
             var notificationCommand =
-                    getNotificationStateFactory().createNotificationCommand(bookingStatus,customerBookingData);
+                    getNotificationStateFactory().createNotificationCommand(bookingStatus,customer_BookingData);
             notificationService.setCommand(notificationCommand);
             notificationService.executeSend();
 
-            customerBookingRepository.save(customerBookingData);
+            customerBookingRepository.save(customer_BookingData);
         }
         catch (IllegalArgumentException exception){
             notificationService.executeCallback();
         }
-        return customerBookingData;
+        return customer_BookingData;
     }
 
     private BookingStateFactory getBookingStateFactory()

@@ -2,7 +2,6 @@ package com.demovehiclepro.dtos;
 
 import com.demovehiclepro.data.enums.Color;
 import com.demovehiclepro.data.enums.PaymentPlan;
-import com.demovehiclepro.data.model.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

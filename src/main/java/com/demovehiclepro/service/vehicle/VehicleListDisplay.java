@@ -22,7 +22,6 @@ public class VehicleListDisplay extends TextWebSocketHandler implements VehicleO
             throws InterruptedException, IOException {
         this.webSocketSession = session;
         System.out.println(message);
-        //session.sendMessage(new TextMessage("Hi, how may we help you?"));
     }
 
     @Override

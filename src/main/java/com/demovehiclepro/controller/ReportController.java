@@ -18,7 +18,7 @@ public class ReportController {
     CustomerBookingRepository customerBookingRepository;
 
     @PostMapping(value = "/v1/gen-report", produces = "application/json")
-    public ResponseEntity<?> genReport(@RequestBody GenReportDTO genReportDTO) throws JSONException {
+    public ResponseEntity<JSONObject> genReport(@RequestBody GenReportDTO genReportDTO) throws JSONException {
         ReportService reportService = new ReportServiceImpl(customerBookingRepository);
         return ResponseEntity.ok(reportService.genReport(genReportDTO));
     }

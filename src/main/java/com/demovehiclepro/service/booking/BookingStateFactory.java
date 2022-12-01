@@ -21,6 +21,8 @@ public class BookingStateFactory {
             case PAYMENT_DONE:
                 bookingState=new PaymentDoneState();
                 break;
+            default:
+                break;
         }
         return bookingState;
     }
