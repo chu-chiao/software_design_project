@@ -33,7 +33,8 @@ public class PieChart extends ReportDecorator{
             }
         }
         JSONObject pieData = new JSONObject();
-        for(Integer key : seMap.keySet()){
+        for(Map.Entry<Integer, Integer> entry : seMap.entrySet()){
+            Integer key = entry.getKey();
             pieData.put(String.valueOf(key), ((float) seMap.get(key) / (float) rawData.length()) * 100);
         }
         return pieData.toString();
