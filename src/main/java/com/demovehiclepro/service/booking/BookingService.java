@@ -17,35 +17,35 @@ public class BookingService {
     CustomerBookingRepository customerBookingRepository;
     BookingStateFactory bookingStateFactory;
     NotificationStateFactory notificationStateFactory;
-    NotificationService notificationService;
+    NotificationService notificationServiceValue;
     public CustomerBooking updateBooking(long salesExecId, long bookingId, BookingStatus bookingStatus, Date date){
         var customerBooking=
                 customerBookingRepository.findByIdAndSalesExecutiveId(bookingId,salesExecId);
         var notificationService = getNotificationService();
-        CustomerBooking customer_BookingData =null;
+        CustomerBooking customerBookingData =null;
         if(customerBooking.isEmpty())
         {
             throw new RegistrationException("Booking is not found");
         }
         try {
-            customer_BookingData=customerBooking.get();
-            var currentLeadScore=customer_BookingData.getLeadScore();
-            var bookingState = getBookingStateFactory().createBookingState(customer_BookingData);
-            customer_BookingData.setLeadScore(bookingState.calculateLeadScore(currentLeadScore));
-            customer_BookingData.setBookingStatus(bookingStatus);
-            customer_BookingData.setDate(date);
+            customerBookingData=customerBooking.get();
+            var currentLeadScore=customerBookingData.getLeadScore();
+            var bookingState = getBookingStateFactory().createBookingState(customerBookingData);
+            customerBookingData.setLeadScore(bookingState.calculateLeadScore(currentLeadScore));
+            customerBookingData.setBookingStatus(bookingStatus);
+            customerBookingData.setDate(date);
 
             var notificationCommand =
-                    getNotificationStateFactory().createNotificationCommand(bookingStatus,customer_BookingData);
+                    getNotificationStateFactory().createNotificationCommand(bookingStatus,customerBookingData);
             notificationService.setCommand(notificationCommand);
             notificationService.executeSend();
 
-            customerBookingRepository.save(customer_BookingData);
+            customerBookingRepository.save(customerBookingData);
         }
         catch (IllegalArgumentException exception){
             notificationService.executeCallback();
         }
-        return customer_BookingData;
+        return customerBookingData;
     }
 
     private BookingStateFactory getBookingStateFactory()
@@ -62,8 +62,8 @@ public class BookingService {
     }
     private NotificationService getNotificationService()
     {
-        if (notificationService == null)
-            notificationService = new NotificationService();
-        return notificationService;
+        if (notificationServiceValue == null)
+            notificationServiceValue = new NotificationService();
+        return notificationServiceValue;
     }
 }

@@ -1,11 +1,11 @@
 package com.demovehiclepro.service.vehicle;
 
+import com.demovehiclepro.exceptions.VehicleException;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class VehicleListDisplay extends TextWebSocketHandler implements VehicleObserver {
     private WebSocketSession webSocketSession;
@@ -25,7 +25,7 @@ public class VehicleListDisplay extends TextWebSocketHandler implements VehicleO
         try {
             this.webSocketSession.sendMessage(textMessage);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new VehicleException(e.getMessage());
         }
     }
 }
