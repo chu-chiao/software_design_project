@@ -2,12 +2,15 @@ package com.demovehiclepro.service.authentication;
 
 import com.demovehiclepro.data.model.BaseUser;
 import com.demovehiclepro.data.model.SalesExecutive;
+import com.demovehiclepro.repository.BaseUserRepository;
 import com.demovehiclepro.repository.SalesExecutiveRepository;
 import com.demovehiclepro.data.dtos.RegistrationDTO;
 import com.demovehiclepro.exceptions.RegistrationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class SalesExecutiveAuthService implements AuthService{
@@ -16,14 +19,17 @@ public class SalesExecutiveAuthService implements AuthService{
     SalesExecutiveRepository salesExecutiveRepository;
 
     @Autowired
+    BaseUserRepository baseUserRepository;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Override
     public SalesExecutive register(RegistrationDTO registrationDTO) {
 
-        var getSalesExecutive=salesExecutiveRepository.findByEmail(registrationDTO.getEmail());
+        Optional<BaseUser> optionalBaseUser =   baseUserRepository.findByEmail(registrationDTO.getEmail());
 
-        if (getSalesExecutive.isPresent())
+        if (optionalBaseUser.isPresent())
         {
             throw new RegistrationException("Registration Failed! User already exists");
         }

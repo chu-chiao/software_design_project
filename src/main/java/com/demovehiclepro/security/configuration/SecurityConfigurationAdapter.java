@@ -1,11 +1,14 @@
 package com.demovehiclepro.security.configuration;
 
+import com.demovehiclepro.data.enums.UserType;
 import com.demovehiclepro.data.model.BaseUser;
 import com.demovehiclepro.repository.BaseUserRepository;
 import com.demovehiclepro.security.jwt.JwtTokenVerifier;
 import com.demovehiclepro.security.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import com.demovehiclepro.security.model.ApplicationUser;
+import com.demovehiclepro.util.Helper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,10 +25,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+//import javax.crypto.SecretKey;
 import javax.crypto.SecretKey;
 import java.util.Arrays;
 import java.util.Optional;
@@ -38,17 +45,35 @@ public class SecurityConfigurationAdapter {
 
     private final BaseUserRepository baseUserRepositoryImpl;
     private final PasswordEncoder passwordEncoder;
-    private final SecretKey secretKey;
     private final Environment env;
 
+    @Autowired
     public SecurityConfigurationAdapter(BaseUserRepository baseUserRepositoryImpl,
-                                        PasswordEncoder passwordEncoder, SecretKey secretKey, Environment env
+                                        PasswordEncoder passwordEncoder, Environment env
                                        ) {
         this.baseUserRepositoryImpl = baseUserRepositoryImpl;
         this.passwordEncoder = passwordEncoder;
-        this.secretKey = secretKey;
         this.env = env;
     }
+
+    private static final RequestMatcher DEALER_URLS = new OrRequestMatcher(
+            new AntPathRequestMatcher(SecurityConstants.DEALER_CREATE_EXECUTIVE, "POST"),
+            new AntPathRequestMatcher(SecurityConstants.ADD_VEHICLE, "POST")
+
+    );
+
+    private static final RequestMatcher SALES_EXECUTIVE_AND_DEALER_URLS = new OrRequestMatcher(
+            new AntPathRequestMatcher(SecurityConstants.GENERATE_REPORT, "POST")
+    );
+
+    private static final RequestMatcher SALES_EXECUTIVE_AND_CUSTOMER_URLS = new OrRequestMatcher(
+            new AntPathRequestMatcher(SecurityConstants.UPDATE_BOOKING, "POST")
+            );
+
+    private static final RequestMatcher ALL_USERTYPE_URLS = new OrRequestMatcher(
+            new AntPathRequestMatcher(SecurityConstants.GET_VEHICLES, "POST")
+    );
+
 
     private Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
         Optional<BaseUser> baseUser = baseUserRepositoryImpl.findByEmail(username);
@@ -64,18 +89,24 @@ public class SecurityConfigurationAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-//                                .requestMatchers(DENY_ALL_URLS).denyAll()
-//                .requestMatchers(PERMITTED_URLS)
-//                .permitAll()
-//                .requestMatchers(ADMIN_URLS)
-//                .hasRole(UserType.ADMIN.name())
-//                .antMatchers(SecurityConstants.DEFAULT)
-//                .hasAnyRole(
-//                        UserType.ADMIN.name(),
-//                        UserType.NGO.name(),
-//                        UserType.DONOR.name(),
-//                        UserType.OFFICIAL.name()
-//                )
+                .requestMatchers(DEALER_URLS)
+                .hasRole(UserType.DEALER.name())
+                .requestMatchers(SALES_EXECUTIVE_AND_CUSTOMER_URLS)
+                .hasAnyRole(
+                        UserType.SALES_EXECUTIVE.name(),
+                        UserType.CUSTOMER.name()
+                )
+                .requestMatchers(SALES_EXECUTIVE_AND_DEALER_URLS)
+                .hasAnyRole(
+                        UserType.SALES_EXECUTIVE.name(),
+                        UserType.DEALER.name()
+                )
+                .requestMatchers(ALL_USERTYPE_URLS)
+                .hasAnyRole(
+                        UserType.DEALER.name(),
+                        UserType.SALES_EXECUTIVE.name(),
+                        UserType.CUSTOMER.name()
+                )
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -91,13 +122,13 @@ public class SecurityConfigurationAdapter {
                         new JwtUsernameAndPasswordAuthenticationFilter(
                                 authenticationManager,
                                 env,
-                                secretKey,
+                                Helper.secretKey,
                                 applicationContext
                         )
                 )
                 .addFilterAfter(
                         new JwtTokenVerifier(
-                                secretKey,
+                                Helper.secretKey,
                                 applicationContext
                         ),
                         JwtUsernameAndPasswordAuthenticationFilter.class

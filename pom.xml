@@ -54,8 +54,9 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
+<!--            No need to specify a version for ease of management of dependency. it would look for the most compatible version-->
+<!--            <version>RELEASE</version>-->
+<!--            <scope>compile</scope>-->
         </dependency>
         <dependency>
             <groupId>com.vaadin.external.google</groupId>
@@ -74,10 +75,10 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-validation</artifactId>-->
+<!--        </dependency>-->
         <!--        For JWT configuration and writing our custom jwt configuration -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

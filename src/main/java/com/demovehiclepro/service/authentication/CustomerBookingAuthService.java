@@ -1,7 +1,6 @@
 package com.demovehiclepro.service.authentication;
 
 import com.demovehiclepro.data.enums.BookingStatus;
-import com.demovehiclepro.data.model.BaseUser;
 import com.demovehiclepro.repository.CustomerBookingRepository;
 import com.demovehiclepro.repository.SalesExecutiveRepository;
 import com.demovehiclepro.data.dtos.CustomerBookingDTO;
@@ -17,10 +16,12 @@ public class CustomerBookingAuthService implements AuthService{
     @Autowired
     CustomerBookingRepository customerBookingRepository;
 
+
     @Autowired
     SalesExecutiveRepository salesExecutiveRepository;
+
     @Override
-    public BaseUser register(RegistrationDTO registrationDTO) {
+    public CustomerBooking register(RegistrationDTO registrationDTO) {
         var customerBookingDTO=(CustomerBookingDTO)registrationDTO;
         var email = customerBookingDTO.getEmail();
         var customerBooking=
