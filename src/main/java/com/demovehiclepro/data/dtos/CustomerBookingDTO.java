@@ -1,4 +1,4 @@
-package com.demovehiclepro.dtos;
+package com.demovehiclepro.data.dtos;
 
 import com.demovehiclepro.data.enums.BookingStatus;
 import com.demovehiclepro.data.enums.UserType;
@@ -18,4 +18,5 @@ public class CustomerBookingDTO extends RegistrationDTO {
     private BookingStatus bookingStatus;
     private Date date;
     private Long vehicleId;
+
 }

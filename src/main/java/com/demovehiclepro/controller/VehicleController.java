@@ -1,8 +1,7 @@
 package com.demovehiclepro.controller;
 
-import com.demovehiclepro.data.model.Vehicle;
-import com.demovehiclepro.data.repository.VehicleRepository;
-import com.demovehiclepro.dtos.NewVehicleDTO;
+import com.demovehiclepro.repository.VehicleRepository;
+import com.demovehiclepro.data.dtos.NewVehicleDTO;
 import com.demovehiclepro.service.vehicle.VehicleService;
 import com.demovehiclepro.service.vehicle.VehicleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class VehicleController {
     VehicleRepository vehicleRepository;
 
     @PostMapping(value = "/v1/add-vehicle", produces = "application/json")
-    public ResponseEntity<Vehicle> addVehicle(@RequestBody NewVehicleDTO newVehicleDTO){
+    public ResponseEntity<?> addVehicle(@RequestBody NewVehicleDTO newVehicleDTO){
         VehicleService vehicleService = new VehicleServiceImpl(vehicleRepository);
         return ResponseEntity.ok(vehicleService.addVehicle(newVehicleDTO));
     }

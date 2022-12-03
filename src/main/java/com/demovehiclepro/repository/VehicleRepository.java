@@ -1,4 +1,4 @@
-package com.demovehiclepro.data.repository;
+package com.demovehiclepro.repository;
 
 import com.demovehiclepro.data.enums.Color;
 import com.demovehiclepro.data.model.Vehicle;
@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     Optional<Vehicle> findByModelAndColor(String model, Color color);
+    void deleteByModelAndColor(String model, Color color);
 }

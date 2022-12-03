@@ -1,4 +1,4 @@
-package com.demovehiclepro.dtos;
+package com.demovehiclepro.data.dtos;
 
 import com.demovehiclepro.data.enums.Color;
 import com.demovehiclepro.data.enums.PaymentPlan;

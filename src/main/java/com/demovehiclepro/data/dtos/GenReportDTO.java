@@ -1,4 +1,4 @@
-package com.demovehiclepro.dtos;
+package com.demovehiclepro.data.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

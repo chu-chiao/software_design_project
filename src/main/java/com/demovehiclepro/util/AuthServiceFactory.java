@@ -1,7 +1,7 @@
 package com.demovehiclepro.util;
 
 import com.demovehiclepro.data.enums.UserType;
-import com.demovehiclepro.dtos.RegistrationDTO;
+import com.demovehiclepro.data.dtos.RegistrationDTO;
 import com.demovehiclepro.service.authentication.AuthService;
 import com.demovehiclepro.service.authentication.CustomerBookingAuthService;
 import com.demovehiclepro.service.authentication.DealerAuthService;
@@ -36,8 +36,7 @@ public final class AuthServiceFactory {
             case SALES_EXECUTIVE:
                 authService = salesExecutiveAuthService;
                 break;
-            default:
-                break;
+            default: //todo:  add default case for registration
         }
 
         return authService;

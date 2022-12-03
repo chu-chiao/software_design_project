@@ -1,7 +1,7 @@
 package com.demovehiclepro.service.vehicle;
 
 import com.demovehiclepro.data.model.Vehicle;
-import com.demovehiclepro.dtos.NewVehicleDTO;
+import com.demovehiclepro.data.dtos.NewVehicleDTO;
 
 import java.util.List;
 
