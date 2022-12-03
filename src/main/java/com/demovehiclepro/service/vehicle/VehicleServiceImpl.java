@@ -1,5 +1,6 @@
 package com.demovehiclepro.service.vehicle;
 
+import com.demovehiclepro.data.enums.Color;
 import com.demovehiclepro.data.enums.PaymentPlan;
 import com.demovehiclepro.data.model.Vehicle;
 import com.demovehiclepro.data.model.VehiclePaymentPlan;
@@ -11,6 +12,7 @@ import com.demovehiclepro.service.vehicle.paymentStrategy.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 
 import java.util.HashSet;
@@ -18,18 +20,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Service("VehicleService")
 public class VehicleServiceImpl implements VehicleService {
 
-    final
+    @Autowired
     VehicleRepository vehicleRepository;
 
-    final
+    @Autowired
     VehiclePaymentPlanRepository vehiclePaymentPlanRepository;
-
-    public VehicleServiceImpl(VehicleRepository vehicleRepository, VehiclePaymentPlanRepository vehiclePaymentPlanRepository) {
-        this.vehicleRepository = vehicleRepository;
-        this.vehiclePaymentPlanRepository = vehiclePaymentPlanRepository;
-    }
 
     @Override
     public Vehicle addVehicle(NewVehicleDTO newVehicleDTO) {
@@ -104,5 +102,15 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<Vehicle> getVehicles() {
         return vehicleRepository.findAll();
+    }
+
+    @Override
+    public void deleteByModelAndColor(String model, Color color) {
+        vehicleRepository.deleteByModelAndColor(model, color);
+    }
+
+    @Override
+    public long getCount() {
+        return vehicleRepository.count();
     }
 }
