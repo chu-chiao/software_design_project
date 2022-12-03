@@ -2,7 +2,6 @@ package com.demovehiclepro.service.booking.Notification.Commands;
 
 import com.demovehiclepro.data.model.CustomerBooking;
 import com.demovehiclepro.service.booking.Notification.INotificationHandler;
-import com.demovehiclepro.service.booking.Notification.NotificationHandler;
 
 public class PaymentDoneNotificationCommand implements ICommand{
     INotificationHandler notificationHandler;

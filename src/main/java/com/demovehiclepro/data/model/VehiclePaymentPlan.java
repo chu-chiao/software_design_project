@@ -2,12 +2,14 @@ package com.demovehiclepro.data.model;
 
 import com.demovehiclepro.data.enums.PaymentPlan;
 import com.demovehiclepro.service.vehicle.paymentStrategy.PaymentPlanStrategy;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Getter

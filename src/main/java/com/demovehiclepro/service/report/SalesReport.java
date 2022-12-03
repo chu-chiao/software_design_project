@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class SalesReport extends Report {
+public class SalesReport implements Report {
     private List<CustomerBooking> customerBookingList;
     public SalesReport(List<CustomerBooking> customerBookingList) {
         super();
@@ -18,7 +18,7 @@ public class SalesReport extends Report {
     public JSONObject showReport() throws JSONException {
         JSONArray allDataArray = new JSONArray();
         JSONObject result = new JSONObject();
-        if (this.customerBookingList.size() > 0) {
+        if (!this.customerBookingList.isEmpty()) {
             for (CustomerBooking customerBooking : this.customerBookingList) {
                 JSONObject eachData = new JSONObject();
                 try {
