@@ -21,6 +21,9 @@
 //     @Autowired
 //     VehicleRepository vehicleRepository;
 
+//     @Autowired
+//     VehiclePaymentPlanRepository vehiclePaymentPlanRepository;
+
 //     @Test
 //     void testAddVehicle() {
 //         String newVehicleModel = "CS00";
@@ -34,7 +37,7 @@
 //         long count = vehicleRepository.count();
 //         Vehicle testVehicle = new Vehicle();
 //         assertNull(testVehicle.getModel());
-//         VehicleService vehicleService = new VehicleServiceImpl(vehicleRepository);
+//         VehicleService vehicleService = new VehicleServiceImpl(vehicleRepository, vehiclePaymentPlanRepository);
 //         testVehicle = vehicleService.addVehicle(newVehicleDTO);
 
 //         assertEquals(newVehicleModel, testVehicle.getModel());

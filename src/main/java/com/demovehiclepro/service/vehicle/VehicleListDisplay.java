@@ -23,7 +23,7 @@ public class VehicleListDisplay extends TextWebSocketHandler implements VehicleO
     @Override
     public void update(TextMessage textMessage) {
         try {
-            this.webSocketSession.sendMessage(textMessage);
+            if (this.webSocketSession != null) this.webSocketSession.sendMessage(textMessage);
         } catch (IOException e) {
             throw new VehicleException(e.getMessage());
         }

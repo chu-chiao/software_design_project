@@ -23,11 +23,12 @@ public class VehicleServiceImpl implements VehicleService {
     final
     VehicleRepository vehicleRepository;
 
-    @Autowired
+    final
     VehiclePaymentPlanRepository vehiclePaymentPlanRepository;
 
-    public VehicleServiceImpl(VehicleRepository vehicleRepository) {
+    public VehicleServiceImpl(VehicleRepository vehicleRepository, VehiclePaymentPlanRepository vehiclePaymentPlanRepository) {
         this.vehicleRepository = vehicleRepository;
+        this.vehiclePaymentPlanRepository = vehiclePaymentPlanRepository;
     }
 
     @Override
