@@ -5,29 +5,32 @@ import com.demovehiclepro.data.model.CustomerBooking;
 import com.demovehiclepro.service.booking.Notification.Commands.*;
 
 public class NotificationStateFactory {
-    public ICommand createNotificationCommand(BookingStatus bookingStatus, CustomerBooking customerBooking) {
-        ICommand notificationCommand = null;
+    private NotificationStateFactory(){}
+    public static ICommand createNotificationCommand(BookingStatus bookingStatus, CustomerBooking customerBooking) {
+        ICommand notificationCommand;
         INotificationHandler notificationHandler = new NotificationHandler();
-        switch (bookingStatus)
-        {
+        switch (bookingStatus) {
             case TEST_DRIVE_BOOKED:
-                notificationCommand = new TestDriveBookedNotificationCommand(notificationHandler, customerBooking);
+                notificationCommand = new TestDriveBookedNotificationCommand(
+                        notificationHandler, customerBooking.getId(), customerBooking.getVehicleId(), customerBooking.getDate());
                 break;
             case TEST_DRIVE_TAKEN:
-                notificationCommand=new TestDriveTakenNotificationCommand(notificationHandler, customerBooking);
+                notificationCommand=new TestDriveTakenNotificationCommand(notificationHandler, customerBooking.getId(), customerBooking.getDate());
                 break;
             case TEST_DRIVE_OVERDUE:
-                notificationCommand=new TestDriveOverdueNotificationCommand(notificationHandler, customerBooking);
+                notificationCommand=new TestDriveOverdueNotificationCommand(notificationHandler, customerBooking.getId(), customerBooking.getVehicleId());
                 break;
             case VEHICLE_BOOKED:
-                notificationCommand=new VehicleBookedNotificationCommand(notificationHandler, customerBooking);
+                notificationCommand=new VehicleBookedNotificationCommand(notificationHandler, customerBooking.getVehicleId(), customerBooking.getDate());
                 break;
             case VEHICLE_BOOKING_CANCELLED:
-                notificationCommand=new VehBookingCancelledNotificationCommand(notificationHandler, customerBooking);
+                notificationCommand=new VehBookingCancelledNotificationCommand(notificationHandler, customerBooking.getVehicleId(), customerBooking.getLocation());
                 break;
             case PAYMENT_DONE:
-                notificationCommand=new PaymentDoneNotificationCommand(notificationHandler, customerBooking);
+                notificationCommand=new PaymentDoneNotificationCommand(notificationHandler, customerBooking.getSalesExecutiveId(), customerBooking.getVehicleId());
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + bookingStatus);
         }
         return notificationCommand;
     }
