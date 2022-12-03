@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Data
 @Entity
-public class Dealer extends BaseUser{
+public class Dealer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +22,6 @@ public class Dealer extends BaseUser{
     @OneToMany
     private Set<Vehicle> vehicles;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private BaseUser baseUser;
 }

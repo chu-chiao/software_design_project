@@ -1,6 +1,6 @@
 package com.demovehiclepro.controller;
 
-import com.demovehiclepro.dtos.RegistrationDTO;
+import com.demovehiclepro.data.dtos.RegistrationDTO;
 import com.demovehiclepro.service.authentication.AuthService;
 import com.demovehiclepro.util.AuthServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;

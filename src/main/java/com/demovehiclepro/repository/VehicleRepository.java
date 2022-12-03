@@ -1,4 +1,4 @@
-package com.demovehiclepro.data.repository;
+package com.demovehiclepro.repository;
 
 import com.demovehiclepro.data.enums.Color;
 import com.demovehiclepro.data.model.Vehicle;

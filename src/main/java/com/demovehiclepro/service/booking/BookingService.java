@@ -2,7 +2,7 @@ package com.demovehiclepro.service.booking;
 
 import com.demovehiclepro.data.enums.BookingStatus;
 import com.demovehiclepro.data.model.CustomerBooking;
-import com.demovehiclepro.data.repository.CustomerBookingRepository;
+import com.demovehiclepro.repository.CustomerBookingRepository;
 import com.demovehiclepro.exceptions.RegistrationException;
 import com.demovehiclepro.service.booking.Notification.*;
 import org.springframework.beans.factory.annotation.Autowired;

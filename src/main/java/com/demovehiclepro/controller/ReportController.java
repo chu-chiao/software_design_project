@@ -1,11 +1,10 @@
 package com.demovehiclepro.controller;
 
-import com.demovehiclepro.data.repository.CustomerBookingRepository;
-import com.demovehiclepro.dtos.GenReportDTO;
+import com.demovehiclepro.repository.CustomerBookingRepository;
+import com.demovehiclepro.data.dtos.GenReportDTO;
 import com.demovehiclepro.service.report.ReportService;
 import com.demovehiclepro.service.report.ReportServiceImpl;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

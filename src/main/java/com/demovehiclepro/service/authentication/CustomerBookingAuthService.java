@@ -2,10 +2,10 @@ package com.demovehiclepro.service.authentication;
 
 import com.demovehiclepro.data.enums.BookingStatus;
 import com.demovehiclepro.data.model.BaseUser;
-import com.demovehiclepro.data.repository.CustomerBookingRepository;
-import com.demovehiclepro.data.repository.SalesExecutiveRepository;
-import com.demovehiclepro.dtos.CustomerBookingDTO;
-import com.demovehiclepro.dtos.RegistrationDTO;
+import com.demovehiclepro.repository.CustomerBookingRepository;
+import com.demovehiclepro.repository.SalesExecutiveRepository;
+import com.demovehiclepro.data.dtos.CustomerBookingDTO;
+import com.demovehiclepro.data.dtos.RegistrationDTO;
 import com.demovehiclepro.data.model.CustomerBooking;
 import com.demovehiclepro.exceptions.RegistrationException;
 import org.springframework.beans.factory.annotation.Autowired;

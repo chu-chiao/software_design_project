@@ -1,9 +1,8 @@
 package com.demovehiclepro.service.authentication;
 
-import com.demovehiclepro.data.model.BaseUser;
-import com.demovehiclepro.dtos.RegistrationDTO;
+import com.demovehiclepro.data.dtos.RegistrationDTO;
 
-public interface AuthService {
+public interface AuthService<T> {
 
-    BaseUser register(RegistrationDTO registrationDTO);
+    T register(RegistrationDTO registrationDTO);
 }

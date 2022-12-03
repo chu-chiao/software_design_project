@@ -1,8 +1,8 @@
 package com.demovehiclepro.service.report;
 
 import com.demovehiclepro.data.model.CustomerBooking;
-import com.demovehiclepro.data.repository.CustomerBookingRepository;
-import com.demovehiclepro.dtos.GenReportDTO;
+import com.demovehiclepro.repository.CustomerBookingRepository;
+import com.demovehiclepro.data.dtos.GenReportDTO;
 import org.json.JSONException;
 import org.json.JSONObject;
 

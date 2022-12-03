@@ -1,6 +1,6 @@
 package com.demovehiclepro.service.report;
 
-import com.demovehiclepro.dtos.GenReportDTO;
+import com.demovehiclepro.data.dtos.GenReportDTO;
 import org.json.JSONException;
 import org.json.JSONObject;
 

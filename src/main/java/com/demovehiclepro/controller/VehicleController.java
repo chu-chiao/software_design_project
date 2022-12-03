@@ -1,7 +1,7 @@
 package com.demovehiclepro.controller;
 
-import com.demovehiclepro.data.repository.VehicleRepository;
-import com.demovehiclepro.dtos.NewVehicleDTO;
+import com.demovehiclepro.repository.VehicleRepository;
+import com.demovehiclepro.data.dtos.NewVehicleDTO;
 import com.demovehiclepro.service.vehicle.VehicleService;
 import com.demovehiclepro.service.vehicle.VehicleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

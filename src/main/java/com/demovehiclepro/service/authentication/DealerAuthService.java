@@ -2,22 +2,26 @@ package com.demovehiclepro.service.authentication;
 
 import com.demovehiclepro.data.model.BaseUser;
 import com.demovehiclepro.data.model.Dealer;
-import com.demovehiclepro.data.repository.DealerRepository;
-import com.demovehiclepro.dtos.RegistrationDTO;
+import com.demovehiclepro.repository.DealerRepository;
+import com.demovehiclepro.data.dtos.RegistrationDTO;
 import com.demovehiclepro.exceptions.RegistrationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class DealerAuthService implements AuthService{
+public class DealerAuthService implements AuthService<Dealer>{
 
     @Autowired
     DealerRepository dealerRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
-    public BaseUser register(RegistrationDTO registrationDTO) {
+    public Dealer register(RegistrationDTO registrationDTO) {
 
         Optional<Dealer> optionalDealer = dealerRepository.findByEmail(registrationDTO.getEmail());
         if(optionalDealer.isPresent()){
@@ -26,8 +30,12 @@ public class DealerAuthService implements AuthService{
 
         Dealer newDealer = new Dealer();
 
-        newDealer.setName(registrationDTO.getName());
-        newDealer.setEmail(registrationDTO.getEmail());
+        BaseUser baseuser = BaseUser.builder()
+                .email(registrationDTO.getEmail())
+                .name(registrationDTO.getName())
+                .password(passwordEncoder.encode(registrationDTO.getPassword()))
+                 .userType(registrationDTO.getUserType()).build();
+        newDealer.setBaseUser(baseuser);
 
         return dealerRepository.save(newDealer);
     }

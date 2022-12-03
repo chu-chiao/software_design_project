@@ -1,4 +1,4 @@
-package com.demovehiclepro.data.repository;
+package com.demovehiclepro.repository;
 
 import com.demovehiclepro.data.model.SalesExecutive;
 import org.springframework.data.jpa.repository.JpaRepository;
