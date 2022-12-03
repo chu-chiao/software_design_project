@@ -40,7 +40,8 @@ public class SalesExecutiveAuthService implements AuthService{
                 .email(registrationDTO.getEmail())
                 .name(registrationDTO.getName())
                 .password(passwordEncoder.encode(registrationDTO.getPassword()))
-                .userType(registrationDTO.getUserType()).build();
+                .userType(registrationDTO.getUserType())
+                .enabled(true).build();
         salesExecutive.setBaseUser(baseuser);
 
         return salesExecutiveRepository.save(salesExecutive);

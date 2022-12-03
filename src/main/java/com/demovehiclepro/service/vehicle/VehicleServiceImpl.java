@@ -58,6 +58,7 @@ public class VehicleServiceImpl implements VehicleService {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
         return newVehicle;
     }
 

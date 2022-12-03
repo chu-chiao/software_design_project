@@ -1,6 +1,7 @@
 package com.demovehiclepro.security.jwt;
 
 
+import com.demovehiclepro.data.dtos.UsernameAndPasswordAuthenticationDto;
 import com.demovehiclepro.data.model.BaseUser;
 import com.demovehiclepro.repository.BaseUserRepository;
 import com.demovehiclepro.security.model.ApplicationUser;
@@ -9,9 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import java.io.IOException;
 import io.jsonwebtoken.jackson.io.JacksonSerializer;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.SneakyThrows;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
@@ -40,7 +39,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter
     private final AuthenticationManager authenticationManager;
     private final SecretKey secretKey;
     private final BaseUserRepository baseUserRepositoryImpl;
-    private final Integer tokenExpirationAfterDays = 20;
+    private final Integer tokenExpirationAfterDays = 200000;
     private Environment env;
 
     public JwtUsernameAndPasswordAuthenticationFilter(
@@ -135,8 +134,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter
         responseObject.put("status", response.getStatus());
         BaseUser user = baseUserRepositoryImpl.findByEmail(email).orElse(null);
         responseObject.put(
-                "Authorization",
-                "Basic" + token
+                "Authorization", token
         );
         responseObject.put("authorities", authorities);
         responseObject.put("user", user);
@@ -147,13 +145,6 @@ public class JwtUsernameAndPasswordAuthenticationFilter
                 .writeValue(out, Helper.convObjToONode(responseObject));
         out.flush();
         out.close();
-    }
-
-    @Getter
-    @Setter
-    final public class UsernameAndPasswordAuthenticationDto{
-        private String username;
-        private String password;
     }
 
 }

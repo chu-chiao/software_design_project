@@ -32,7 +32,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
     private final BaseUserRepository baseUserRepositoryImpl;
 
     private final String TOKEN_PREFIX = "Bearer";
-    private final String AUTHORIZATION = "Bearer";
+    private final String AUTHORIZATION = "Authorization";
 
     public JwtTokenVerifier(
             SecretKey secretKey,
@@ -52,9 +52,10 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
 
         if (
-                Helper.notBlank(authorizationHeader) ||
+                !Helper.notBlank(authorizationHeader) ||
                         !authorizationHeader.startsWith(TOKEN_PREFIX)
         ) {
+            log.info("AUTH HEADER : {}", authorizationHeader);
             filterChain.doFilter(request, response);
             return;
         }

@@ -38,7 +38,9 @@ public class DealerAuthService implements AuthService<Dealer>{
                 .email(registrationDTO.getEmail())
                 .name(registrationDTO.getName())
                 .password(passwordEncoder.encode(registrationDTO.getPassword()))
-                 .userType(registrationDTO.getUserType()).build();
+                 .userType(registrationDTO.getUserType())
+                .enabled(true)
+                .build();
         newDealer.setBaseUser(baseuser);
 
         return dealerRepository.save(newDealer);

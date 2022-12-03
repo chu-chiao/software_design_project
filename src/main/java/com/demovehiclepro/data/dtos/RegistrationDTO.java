@@ -5,16 +5,19 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.*;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @Setter
 @Getter
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "userType", visible = true)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = CustomerBookingDTO.class, name = "CUSTOMER")
-})
+@NoArgsConstructor
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "userType", visible = true)
+//@JsonSubTypes({
+//        @JsonSubTypes.Type(value = CustomerBookingDTO.class, name = "CUSTOMER")
+//})
 public class RegistrationDTO {
 
     private String name;
@@ -25,6 +28,7 @@ public class RegistrationDTO {
     @Size(min = 8)
     private String password;
 
+    @Enumerated(value = EnumType.STRING)
     private UserType userType;
 
     public RegistrationDTO(String name, String email, UserType userType) {

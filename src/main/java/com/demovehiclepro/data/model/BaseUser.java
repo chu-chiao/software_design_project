@@ -29,6 +29,6 @@ public class BaseUser {
     /** For Spring Security
     ** User is not allowed to login if this is false
      **/
-    private boolean enabled;
+    private boolean enabled = true;
 
 }

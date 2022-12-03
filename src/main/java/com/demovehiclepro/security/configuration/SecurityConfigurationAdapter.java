@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -48,6 +49,9 @@ public class SecurityConfigurationAdapter {
     private final Environment env;
 
     @Autowired
+    @Lazy AuthenticationManager authenticationManager;
+
+    @Autowired
     public SecurityConfigurationAdapter(BaseUserRepository baseUserRepositoryImpl,
                                         PasswordEncoder passwordEncoder, Environment env
                                        ) {
@@ -71,7 +75,7 @@ public class SecurityConfigurationAdapter {
             );
 
     private static final RequestMatcher ALL_USERTYPE_URLS = new OrRequestMatcher(
-            new AntPathRequestMatcher(SecurityConstants.GET_VEHICLES, "POST")
+            new AntPathRequestMatcher(SecurityConstants.GET_VEHICLES, "GET")
     );
 
 
@@ -82,7 +86,8 @@ public class SecurityConfigurationAdapter {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        final AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+//        final AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManagerBuilder.class).build();
+        log.info("Auth Manager --> {}",authenticationManager);
        final ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
         http

@@ -1,36 +1,37 @@
-// package com.demovehiclepro.service.authentication;
+ package com.demovehiclepro.service.authentication;
 
-// import com.demovehiclepro.data.enums.UserType;
-// import com.demovehiclepro.data.model.BaseUser;
-// import com.demovehiclepro.data.model.Dealer;
-// import com.demovehiclepro.repository.DealerRepository;
-// import com.demovehiclepro.data.dtos.RegistrationDTO;
-// import org.junit.jupiter.api.Test;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.boot.test.context.SpringBootTest;
+ import com.demovehiclepro.data.enums.UserType;
+ import com.demovehiclepro.data.model.BaseUser;
+ import com.demovehiclepro.data.model.Dealer;
+ import com.demovehiclepro.repository.DealerRepository;
+ import com.demovehiclepro.data.dtos.RegistrationDTO;
+ import org.junit.jupiter.api.Test;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.boot.test.context.SpringBootTest;
 
-// import static org.junit.jupiter.api.Assertions.*;
+ import static org.junit.jupiter.api.Assertions.*;
 
-// @SpringBootTest
-// class DealerAuthServiceImplTest {
+ @SpringBootTest
+ class DealerAuthServiceImplTest {
 
-//     @Autowired
-//     DealerAuthService dealerAuthService;
+     @Autowired
+     DealerAuthService dealerAuthService;
 
-//     @Autowired
-//     DealerRepository dealerRepository;
+     @Autowired
+     DealerRepository dealerRepository;
 
-//     @Test
-//     void register() {
-//         RegistrationDTO newRegistrationDto = new RegistrationDTO("testUser",
-//                 "testuser@gmail.com", UserType.DEALER);
+     @Test
+     void register() {
 
-//         BaseUser testDealer = new Dealer();
+         RegistrationDTO newRegistrationDto = new RegistrationDTO("testUser3",
+                 "testuser3@gmail.com", "testuser3",UserType.DEALER);
 
-//         assertEquals(null,testDealer.getName());
+         Dealer testDealer = new Dealer();
 
-//         testDealer = dealerAuthService.register(newRegistrationDto);
+         assertEquals(null,testDealer.getBaseUser());
 
-//         assertEquals("testUser",testDealer.getName());
-//     }
-// }
+         testDealer = dealerAuthService.register(newRegistrationDto);
+
+         assertEquals("testUser3",testDealer.getBaseUser().getName());
+     }
+ }
