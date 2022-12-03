@@ -1,24 +1,26 @@
 package com.demovehiclepro.service.booking.Notification.Commands;
 
-import com.demovehiclepro.data.model.CustomerBooking;
 import com.demovehiclepro.service.booking.Notification.INotificationHandler;
+import java.util.Date;
 
 public class TestDriveTakenNotificationCommand implements ICommand{
     INotificationHandler notificationHandler;
-    CustomerBooking customerBooking;
+    Long bookingId;
+    Date testDriveDate;
     public TestDriveTakenNotificationCommand
-            (INotificationHandler notificationHandler, CustomerBooking customerBooking)
+            (INotificationHandler notificationHandler, Long bookingId, Date testDriveDate)
     {
         this.notificationHandler = notificationHandler;
-        this.customerBooking = customerBooking;
+        this.bookingId = bookingId;
+        this.testDriveDate=testDriveDate;
     }
     @Override
     public void execute() {
-        notificationHandler.sendNotification(customerBooking);
+        notificationHandler.sendTestDriveTakenNotification(bookingId,testDriveDate);
     }
 
     @Override
     public void undo() {
-        notificationHandler.callBackNotification(customerBooking);
+        notificationHandler.callBackTestDriveTakenNotification(bookingId,testDriveDate);
     }
 }

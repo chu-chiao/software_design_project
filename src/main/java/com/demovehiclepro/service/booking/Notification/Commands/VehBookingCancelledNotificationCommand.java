@@ -1,23 +1,25 @@
 package com.demovehiclepro.service.booking.Notification.Commands;
 
-import com.demovehiclepro.data.model.CustomerBooking;
 import com.demovehiclepro.service.booking.Notification.INotificationHandler;
 
 public class VehBookingCancelledNotificationCommand implements ICommand{
     INotificationHandler notificationHandler;
-    CustomerBooking customerBooking;
+    Long vehicleId;
+    String location;
 
-    public VehBookingCancelledNotificationCommand(INotificationHandler notificationHandler, CustomerBooking customerBooking){
+    public VehBookingCancelledNotificationCommand(
+            INotificationHandler notificationHandler, Long vehicleId, String location){
         this.notificationHandler = notificationHandler;
-        this.customerBooking = customerBooking;
+        this.location = location;
+        this.vehicleId = vehicleId;
     }
     @Override
     public void execute() {
-        notificationHandler.sendNotification(customerBooking);
+        notificationHandler.sendVehBookingCancelledNotification(vehicleId, location);
     }
 
     @Override
     public void undo() {
-        notificationHandler.callBackNotification(customerBooking);
+        notificationHandler.callBackVehBookingCancelledNotification(vehicleId, location);
     }
 }

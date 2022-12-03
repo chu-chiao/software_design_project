@@ -1,23 +1,25 @@
 package com.demovehiclepro.service.booking.Notification.Commands;
 
-import com.demovehiclepro.data.model.CustomerBooking;
 import com.demovehiclepro.service.booking.Notification.INotificationHandler;
 
 public class TestDriveOverdueNotificationCommand implements ICommand{
     INotificationHandler notificationHandler;
-    CustomerBooking customerBooking;
-    public TestDriveOverdueNotificationCommand(INotificationHandler notificationHandler, CustomerBooking customerBooking)
+    Long bookingId;
+    Long vehicleId;
+    public TestDriveOverdueNotificationCommand(
+            INotificationHandler notificationHandler, Long bookingId, Long vehicleId)
     {
         this.notificationHandler = notificationHandler;
-        this.customerBooking = customerBooking;
+        this.bookingId = bookingId;
+        this.vehicleId = vehicleId;
     }
     @Override
     public void execute() {
-        notificationHandler.sendNotification(customerBooking);
+        notificationHandler.sendTestDriveOverdueNotification(bookingId,vehicleId);
     }
 
     @Override
     public void undo() {
-        notificationHandler.callBackNotification(customerBooking);
+        notificationHandler.callBackTestDriveOverdueNotification(bookingId);
     }
 }

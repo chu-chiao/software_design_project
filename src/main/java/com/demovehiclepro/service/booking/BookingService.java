@@ -16,12 +16,11 @@ public class BookingService {
     @Autowired
     CustomerBookingRepository customerBookingRepository;
     BookingStateFactory bookingStateFactory;
-    NotificationStateFactory notificationStateFactory;
     NotificationService notificationServiceValue;
     public CustomerBooking updateBooking(long salesExecId, long bookingId, BookingStatus bookingStatus, Date date){
         var customerBooking=
                 customerBookingRepository.findByIdAndSalesExecutiveId(bookingId,salesExecId);
-        var notificationService = getNotificationService();
+        NotificationService notificationService = getNotificationService();
         CustomerBooking customerBookingData =null;
         if(customerBooking.isEmpty())
         {
@@ -36,7 +35,7 @@ public class BookingService {
             customerBookingData.setDate(date);
 
             var notificationCommand =
-                    getNotificationStateFactory().createNotificationCommand(bookingStatus,customerBookingData);
+                    NotificationStateFactory.createNotificationCommand(bookingStatus,customerBookingData);
             notificationService.setCommand(notificationCommand);
             notificationService.executeSend();
 
@@ -53,12 +52,6 @@ public class BookingService {
         if(bookingStateFactory == null)
             bookingStateFactory = new BookingStateFactory();
         return bookingStateFactory;
-    }
-    private NotificationStateFactory getNotificationStateFactory()
-    {
-        if (notificationStateFactory == null)
-            notificationStateFactory = new NotificationStateFactory();
-        return notificationStateFactory;
     }
     private NotificationService getNotificationService()
     {
