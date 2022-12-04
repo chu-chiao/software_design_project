@@ -25,7 +25,7 @@ public class SalesExecutiveAuthService implements AuthService{
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @PreAuthorize(value = "ROLE_DEALER")
+    @PreAuthorize("hasRole('ROLE_DEALER')")
     @Override
     public SalesExecutive register(RegistrationDTO registrationDTO) {
 
