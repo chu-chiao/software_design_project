@@ -4,10 +4,7 @@ import com.demovehiclepro.data.enums.BookingStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -20,7 +17,10 @@ public class CustomerBooking{
     private String name;
     private String email;
     private String location;
+
+    @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
+
     private Date date;
     private Long vehicleId;
     private Long salesExecutiveId;
