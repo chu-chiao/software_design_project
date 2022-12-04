@@ -7,6 +7,7 @@ import com.demovehiclepro.repository.SalesExecutiveRepository;
 import com.demovehiclepro.data.dtos.RegistrationDTO;
 import com.demovehiclepro.exceptions.RegistrationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class SalesExecutiveAuthService implements AuthService{
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @PreAuthorize(value = "ROLE_DEALER")
     @Override
     public SalesExecutive register(RegistrationDTO registrationDTO) {
 

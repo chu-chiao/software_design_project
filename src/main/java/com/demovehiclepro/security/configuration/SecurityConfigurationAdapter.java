@@ -61,9 +61,11 @@ public class SecurityConfigurationAdapter {
     }
 
     private static final RequestMatcher DEALER_URLS = new OrRequestMatcher(
-            new AntPathRequestMatcher(SecurityConstants.DEALER_CREATE_EXECUTIVE, "POST"),
             new AntPathRequestMatcher(SecurityConstants.ADD_VEHICLE, "POST")
+    );
 
+    private static final RequestMatcher OPEN_URLS = new OrRequestMatcher(
+            new AntPathRequestMatcher(SecurityConstants.REGISTER, "POST")
     );
 
     private static final RequestMatcher SALES_EXECUTIVE_AND_DEALER_URLS = new OrRequestMatcher(
@@ -86,14 +88,15 @@ public class SecurityConfigurationAdapter {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        final AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManagerBuilder.class).build();
-        log.info("Auth Manager --> {}",authenticationManager);
+
        final ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
         http
                 .csrf()
                 .disable()
                 .authorizeRequests()
+                .requestMatchers(OPEN_URLS)
+                .permitAll()
                 .requestMatchers(DEALER_URLS)
                 .hasRole(UserType.DEALER.name())
                 .requestMatchers(SALES_EXECUTIVE_AND_CUSTOMER_URLS)
