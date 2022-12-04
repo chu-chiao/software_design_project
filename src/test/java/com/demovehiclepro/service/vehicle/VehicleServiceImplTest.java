@@ -8,6 +8,7 @@
  import org.junit.jupiter.api.Test;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.boot.test.context.SpringBootTest;
+ import org.springframework.transaction.annotation.Transactional;
 
  import java.util.HashSet;
  import java.util.Set;
@@ -22,6 +23,7 @@
      VehicleService vehicleService;
 
      @Test
+     @Transactional
      void testAddVehicle() {
          String newVehicleModel = "CS00";
          vehicleService.deleteByModelAndColor(newVehicleModel, Color.BLACK);
