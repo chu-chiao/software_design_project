@@ -15,24 +15,23 @@ public class BookingService {
 
     @Autowired
     CustomerBookingRepository customerBookingRepository;
-    BookingStateFactory bookingStateFactory;
     NotificationService notificationServiceValue;
-    public CustomerBooking updateBooking(long salesExecId, long bookingId, BookingStatus bookingStatus, Date date){
+    public CustomerBooking updateBooking(long salesExecId, long bookingId, BookingStatus bookingStatus){
         var customerBooking=
                 customerBookingRepository.findByIdAndSalesExecutiveId(bookingId,salesExecId);
         NotificationService notificationService = getNotificationService();
-        CustomerBooking customerBookingData =null;
+        CustomerBooking customerBookingData = null;
         if(customerBooking.isEmpty())
         {
             throw new RegistrationException("Booking is not found");
         }
         try {
             customerBookingData=customerBooking.get();
-            var currentLeadScore=customerBookingData.getLeadScore();
-            var bookingState = getBookingStateFactory().createBookingState(customerBookingData);
-            customerBookingData.setLeadScore(bookingState.calculateLeadScore(currentLeadScore));
             customerBookingData.setBookingStatus(bookingStatus);
-            customerBookingData.setDate(date);
+            var currentLeadScore=customerBookingData.getLeadScore();
+            var bookingState = BookingStateFactory.createBookingState(customerBookingData);
+            customerBookingData.setLeadScore(bookingState.calculateLeadScore(currentLeadScore));
+            customerBookingData.setDate(new Date());
 
             var notificationCommand =
                     NotificationStateFactory.createNotificationCommand(bookingStatus,customerBookingData);
@@ -43,15 +42,9 @@ public class BookingService {
         }
         catch (IllegalArgumentException exception){
             notificationService.executeCallback();
+            customerBookingData=null;
         }
         return customerBookingData;
-    }
-
-    private BookingStateFactory getBookingStateFactory()
-    {
-        if(bookingStateFactory == null)
-            bookingStateFactory = new BookingStateFactory();
-        return bookingStateFactory;
     }
     private NotificationService getNotificationService()
     {

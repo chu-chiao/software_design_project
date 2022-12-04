@@ -3,7 +3,6 @@ package com.demovehiclepro.service.booking;
 import java.util.Date;
 
 public class VehicleBookedState extends BookingState{
-
     Date dateOfTestDriveTaken;
     public VehicleBookedState(Date dateOfTestDriveTaken)
     {

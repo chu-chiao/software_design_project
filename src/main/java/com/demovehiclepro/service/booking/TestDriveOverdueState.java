@@ -1,7 +1,6 @@
 package com.demovehiclepro.service.booking;
 
 import java.util.Date;
-
 public class TestDriveOverdueState extends BookingState{
     Date dateOfBooking;
     public TestDriveOverdueState(Date dateOfBooking)

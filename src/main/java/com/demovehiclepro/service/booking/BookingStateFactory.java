@@ -3,8 +3,9 @@ package com.demovehiclepro.service.booking;
 import com.demovehiclepro.data.model.CustomerBooking;
 
 public class BookingStateFactory {
-    public BookingState createBookingState(CustomerBooking customerBooking) {
-        BookingState bookingState = null;
+    private BookingStateFactory(){}
+    public static BookingState createBookingState(CustomerBooking customerBooking) {
+        BookingState bookingState;
         switch (customerBooking.getBookingStatus()){
             case TEST_DRIVE_OVERDUE:
                 bookingState=new TestDriveOverdueState(customerBooking.getDate());
@@ -22,7 +23,7 @@ public class BookingStateFactory {
                 bookingState=new PaymentDoneState();
                 break;
             default:
-                break;
+                throw new IllegalStateException("Unexpected value: " + customerBooking.getBookingStatus());
         }
         return bookingState;
     }

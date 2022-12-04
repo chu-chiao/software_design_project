@@ -1,9 +1,10 @@
 package com.demovehiclepro.data.dtos;
 
 import com.demovehiclepro.data.enums.UserType;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,10 +15,10 @@ import javax.validation.constraints.Size;
 @Setter
 @Getter
 @NoArgsConstructor
-//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "userType", visible = true)
-//@JsonSubTypes({
-//        @JsonSubTypes.Type(value = CustomerBookingDTO.class, name = "CUSTOMER")
-//})
+/*@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "userType", visible = true)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CustomerBookingDTO.class, name = "CUSTOMER")
+})*/
 public class RegistrationDTO {
 
     private String name;
