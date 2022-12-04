@@ -15,10 +15,14 @@ public class Vehicle {
     private Long id;
 
     private String model;
+
+    @Enumerated(EnumType.STRING)
     private Color color;
     private Double price;
     private Integer capacity;
+
     @OneToMany
+    @Enumerated(EnumType.STRING)
     private Set<VehiclePaymentPlan> vehiclePaymentPlans;
 
 
